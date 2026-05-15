@@ -1,13 +1,13 @@
-﻿---
-title: "WebLogic T3反序列化"
-date: 2026-04-15T18:03:16+08:00
-summary: " "
-url: "/posts/Java反序列化之Weblogic-T3反序列化/"
+---
+title: WebLogic T3反序列化
+date: 2026-05-16T00:56:16+08:00
+summary: 好难啊压根看不懂
+url: /posts/Java反序列化之Weblogic-T3反序列化/
 categories:
-  - "javasec"
+  - javasec
 tags:
-  - "javasec"
-draft: true
+  - javasec
+draft: false
 ---
 
 # 测试环境搭建
@@ -204,7 +204,6 @@ if __name__ == "__main__":
 
 ![image-20260415215112213](image/image-20260415215112213.png)
 
-# 代码调试
 
 参考文章：
 

