@@ -1,6 +1,6 @@
 ---
 title: WebLogic T3反序列化
-date: 2026-05-16T00:56:16+08:00
+date: 2026-05-11T00:56:16+08:00
 summary: 好难啊压根看不懂
 url: /posts/Java反序列化之Weblogic-T3反序列化/
 categories:

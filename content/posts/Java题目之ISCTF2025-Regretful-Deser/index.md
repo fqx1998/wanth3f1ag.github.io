@@ -1,12 +1,12 @@
-﻿---
-title: "ISCTF2025 Regretful_Deser"
+---
+title: ISCTF2025 Regretful_Deser
 date: 2025-12-04T13:37:41+08:00
-summary: "看不懂一点，坐等复现"
-url: "/posts/Java题目之ISCTF2025-Regretful-Deser/"
+summary: 看不懂一点，坐等复现
+url: /posts/Java题目之ISCTF2025-Regretful-Deser/
 categories:
-  - "javasec"
+  - javasec
 tags:
-  - "ISCTF2025"
+  - javasec
 draft: true
 ---
 

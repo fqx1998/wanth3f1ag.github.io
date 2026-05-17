@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java题目之AliCTF2025-Jtools/index.md",
+                "file": "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -168,7 +168,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Java题目之AliCTF2025-Jtools/index.md",
+                "file": "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -182,7 +182,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 265.5
+    "width": 280.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -197,31 +197,41 @@
   },
   "active": "02338d9bbc413cc7",
   "lastOpenFiles": [
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517181531.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517181405.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517175150.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517175110.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517163634.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517160639.png",
+    "Java反序列化CC1链/index.md",
+    "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517153326.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517152654.png",
+    "Java题目之0CTF2022 Hessian_onlyjdk/image",
     "Java反序列化之Weblogic-T3反序列化/index.md",
-    "FacebookCTF2019wp/index.md",
+    "Java题目之巅峰极客2023-BabyURL/index.md",
+    "Java题目之巅峰极客2024-Ezjava/index.md",
     "Java题目之AliCTF2025-Jtools/index.md",
+    "Java题目之CISCN2023-Deserbug/index.md",
+    "Java题目之HKCERTCTF2025-Labyrinth/index.md",
+    "Java题目之ISCTF2025-Regretful-Deser/index.md",
+    "Java题目之LilCTF2025-blade-cc/index.md",
+    "Java题目之PolarCTF-Java方向题解/index.md",
+    "Java题目之VNCTF2026-black-coffee/index.md",
+    "Java之fastjson1-2-68-commons-io-任意文件写入利用链学习/index.md",
+    "Java题目之0CTF2022 Hessian_onlyjdk",
+    "FacebookCTF2019wp/index.md",
     "Java题目之AliCTF2025-Jtools/image/Pasted image 20260516004903.png",
     "Java题目之AliCTF2025-Jtools/image/Pasted image 20260516004305.png",
     "Java之Java-Agent-学习/index.md",
     "北京长亭之旅/index.md",
     "北京长亭之旅/image/17e57a97a31413c52e37c80869ae32f4.jpg",
-    "北京长亭之旅/image/6c2ed7d5481b56187030db94d8aeb0cf.jpg",
     "如何使用Agent以及一些好用的skill/index.md",
     "基础知识/index.md",
     "Java反序列化CC4链/index.md",
-    "北京长亭之旅/image/1a19a611ca2788b3ee3bf9441bdd2939.jpg",
-    "北京长亭之旅/image/50df218514813805d995aaf7ae4c904d.jpg",
-    "北京长亭之旅/image/a1e665466c1b602911f6c2289c495b00.jpg",
-    "北京长亭之旅/image/Pasted image 20260514114740.png",
-    "Java题目之AliCTF2025-Jtools/image/Pasted image 20260514021215.png",
-    "Java反序列化CC1链/index.md",
     "Java反序列化CC2链/index.md",
     "Java反序列化CB链/index.md",
-    "Java题目之AliCTF2025-Jtools/image/Pasted image 20260514004132.png",
     "Java题目之AliCTF2025-Jtools/image",
-    "Java题目之巅峰极客2024-Ezjava/index.md",
-    "Java题目之HKCERTCTF2025-Labyrinth/index.md",
-    "Java题目之CISCN2023-Deserbug/index.md",
     "Java题目之AliCTF2025-Jtools",
     "Java题目之AliCTF2026 Fileury/index.md",
     "Java题目之AliCTF2026 Fileury",

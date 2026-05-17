@@ -1,12 +1,12 @@
-﻿---
-title: "PolarCTF-Java方向题解"
+---
+title: PolarCTF-Java方向题解
 date: 2025-12-04T10:38:20+08:00
-summary: "PolarCTF-Java方向题解"
-url: "/posts/Java题目之PolarCTF-Java方向题解/"
+summary: PolarCTF-Java方向题解
+url: /posts/Java题目之PolarCTF-Java方向题解/
 categories:
-  - "javasec"
+  - javasec
 tags:
-  - "java题目"
+  - javasec
 draft: false
 ---
 
