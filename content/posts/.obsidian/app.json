@@ -2,7 +2,14 @@
   "attachmentFolderPath": "./image",
   "newLinkFormat": "relative",
   "useMarkdownLinks": true,
-  "strictLineBreaks": true,
+  "strictLineBreaks": false,
   "showLineNumber": false,
-  "promptDelete": false
+  "promptDelete": false,
+  "readableLineLength": false,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
 }

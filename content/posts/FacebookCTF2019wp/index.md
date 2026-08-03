@@ -642,7 +642,7 @@ docker compose up -d --build
 
 那就是存在SQL注入的，是pgsql注入，测一下过滤
 
-mad我发现我本地启动的环境很不稳定，有些payload测了两次是不同的
+mad我发现我本地启动的环境很不稳定，有些payload测了两次是不同的回显
 
 直接参考大佬的wp吧：
 

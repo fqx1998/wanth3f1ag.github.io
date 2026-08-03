@@ -2,19 +2,27 @@
   "recentFiles": [
     {
       "basename": "index",
-      "path": "Java题目之0CTF2022 Hessian_onlyjdk/index.md"
+      "path": "深入浅出sql注入之mysql/index.md"
     },
     {
       "basename": "index",
-      "path": "Java反序列化CC1链/index.md"
+      "path": "对于RCE和文件包含的一点总结/index.md"
     },
     {
       "basename": "index",
-      "path": "Java反序列化之Weblogic-T3反序列化/index.md"
+      "path": "应急响应（持续更新）/index.md"
     },
     {
       "basename": "index",
-      "path": "Java题目之巅峰极客2023-BabyURL/index.md"
+      "path": "K8s基础/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Docker逃逸学习/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "流量分析/index.md"
     },
     {
       "basename": "index",
@@ -22,43 +30,19 @@
     },
     {
       "basename": "index",
-      "path": "Java题目之AliCTF2025-Jtools/index.md"
+      "path": "SUCTF2026/index.md"
     },
     {
       "basename": "index",
-      "path": "Java题目之CISCN2023-Deserbug/index.md"
+      "path": "SSRF的一些学习/index.md"
     },
     {
       "basename": "index",
-      "path": "Java题目之HKCERTCTF2025-Labyrinth/index.md"
+      "path": "web入门反序列化篇-ctfshow/index.md"
     },
     {
       "basename": "index",
-      "path": "Java题目之ISCTF2025-Regretful-Deser/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java题目之LilCTF2025-blade-cc/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java题目之PolarCTF-Java方向题解/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java题目之VNCTF2026-black-coffee/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java之fastjson1-2-68-commons-io-任意文件写入利用链学习/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "FacebookCTF2019wp/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java之Java-Agent-学习/index.md"
+      "path": "Java反序列化/index.md"
     },
     {
       "basename": "index",
@@ -66,7 +50,143 @@
     },
     {
       "basename": "index",
-      "path": "如何使用Agent以及一些好用的skill/index.md"
+      "path": "基于Jabref的PR的一些猜测/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "D-3CTF2025/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "ctfshow入门CMS/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "2025HNCTF/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java反序列化之高版本触发toString的几种方法/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java反序列化之Hessian反序列化/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java内存马之Spring-Controller内存马/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java反序列化之Fastjson1-2-6x绕过/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "域渗透之Kerberos协议/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java反序列化CB链/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "ctfshow入门框架复现/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "ctfshow入门代码审计/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "PHP反序列化-TP5框架/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "2023CISCN国赛web浮现/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "陇剑杯2023wp/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "第九届强网杯wp/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "玄机第1章应急响应(已做完)/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "ctfshow入门Java/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "BUGKU-web/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "文件上传的一些积累/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "极客大挑战2019wp--web(已做完)/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "极客大挑战2020wp-web(已做完)/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "极客大挑战2024wp-web/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "极客大挑战2025wp-web/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "玄机第4章windows实战/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "Java反序列化之Shiro反序列化/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "PHP的一些小技巧/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "CVE-2017-15715漏洞复现/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "sqlmap基础命令的摘录/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "玄机第3章权限维持(已做完)/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "PHP反序列化/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "ctfshow入门反序列化/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "CSRF的一点点学习/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "web入门XSS篇-ctfshow/index.md"
+    },
+    {
+      "basename": "index",
+      "path": "SSTI的积累/index.md"
     },
     {
       "basename": "index",
@@ -74,15 +194,11 @@
     },
     {
       "basename": "index",
-      "path": "Java反序列化CC4链/index.md"
+      "path": "CVE-2012-1823漏洞复现/index.md"
     },
     {
       "basename": "index",
-      "path": "Java反序列化CC2链/index.md"
-    },
-    {
-      "basename": "index",
-      "path": "Java反序列化CB链/index.md"
+      "path": "ctfshow单身杯2/index.md"
     }
   ],
   "omittedPaths": [

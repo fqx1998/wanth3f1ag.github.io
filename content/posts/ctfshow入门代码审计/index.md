@@ -1,4 +1,4 @@
-﻿---
+---
 title: "ctfshow入门代码审计"
 date: 2026-05-04T02:31:33+08:00
 lastmod: 2026-05-04T02:31:33+08:00
@@ -13,7 +13,7 @@ draft: false
 
 # web301
 
-## #SQL注入+strcasecmp函数漏洞
+## \# SQL注入+strcasecmp函数漏洞
 
 大菜鸡几年前写的项目
 

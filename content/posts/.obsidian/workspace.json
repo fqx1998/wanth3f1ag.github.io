@@ -4,16 +4,86 @@
     "type": "split",
     "children": [
       {
-        "id": "79fbdeca58f2dc33",
+        "id": "7789ef0be10d708d",
         "type": "tabs",
         "children": [
           {
-            "id": "02338d9bbc413cc7",
+            "id": "4cdb40dad123ba3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
+                "file": "深入浅出sql注入之mysql/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "1bb2473f8958f5f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "流量分析/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "59e35bd1e88b7016",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "深入浅出sql注入之mysql/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "422aa7255e5d1685",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Docker逃逸学习/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "9a0bfea327926d2a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "K8s基础/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "9a0ff528a208f33f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "应急响应（持续更新）/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,7 +111,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "byModifiedTime",
-                "autoReveal": false
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -53,7 +125,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#LibreOffice",
+                "query": "unsafe",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,7 +141,10 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-bookmark",
               "title": "书签"
             }
@@ -86,11 +161,12 @@
               "title": "Recent Files"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 298.5596160888672
   },
   "right": {
     "id": "3c2493f62281522c",
@@ -168,13 +244,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
+                "file": "深入浅出sql注入之mysql/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "大纲"
             }
           }
         ],
@@ -195,48 +271,53 @@
       "bases:新建数据库": false
     }
   },
-  "active": "02338d9bbc413cc7",
+  "active": "be40578dc60f0a7b",
   "lastOpenFiles": [
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517181531.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517181405.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517175150.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517175110.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517163634.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517160639.png",
-    "Java反序列化CC1链/index.md",
-    "Java题目之0CTF2022 Hessian_onlyjdk/index.md",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517153326.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image/Pasted image 20260517152654.png",
-    "Java题目之0CTF2022 Hessian_onlyjdk/image",
-    "Java反序列化之Weblogic-T3反序列化/index.md",
-    "Java题目之巅峰极客2023-BabyURL/index.md",
+    "对于RCE和文件包含的一点总结/index.md",
+    "应急响应（持续更新）/index.md",
+    "K8s基础/index.md",
+    "Docker逃逸学习/index.md",
+    "深入浅出sql注入之mysql/index.md",
+    "流量分析/index.md",
     "Java题目之巅峰极客2024-Ezjava/index.md",
-    "Java题目之AliCTF2025-Jtools/index.md",
-    "Java题目之CISCN2023-Deserbug/index.md",
-    "Java题目之HKCERTCTF2025-Labyrinth/index.md",
-    "Java题目之ISCTF2025-Regretful-Deser/index.md",
-    "Java题目之LilCTF2025-blade-cc/index.md",
-    "Java题目之PolarCTF-Java方向题解/index.md",
-    "Java题目之VNCTF2026-black-coffee/index.md",
-    "Java之fastjson1-2-68-commons-io-任意文件写入利用链学习/index.md",
-    "Java题目之0CTF2022 Hessian_onlyjdk",
-    "FacebookCTF2019wp/index.md",
-    "Java题目之AliCTF2025-Jtools/image/Pasted image 20260516004903.png",
-    "Java题目之AliCTF2025-Jtools/image/Pasted image 20260516004305.png",
-    "Java之Java-Agent-学习/index.md",
+    "SUCTF2026/index.md",
+    "SSRF的一些学习/index.md",
+    "web入门反序列化篇-ctfshow/index.md",
+    "Java反序列化/index.md",
     "北京长亭之旅/index.md",
-    "北京长亭之旅/image/17e57a97a31413c52e37c80869ae32f4.jpg",
-    "如何使用Agent以及一些好用的skill/index.md",
-    "基础知识/index.md",
-    "Java反序列化CC4链/index.md",
-    "Java反序列化CC2链/index.md",
+    "北京长亭之旅/image/ec3a5323ced3fc33c5063c4bc91612d2.jpg",
+    "北京长亭之旅/image/53e7d9912b4b371197be1c6414d4271b.jpg",
+    "北京长亭之旅/image/f3cb92470a956185d6481092034ffc13.jpg",
+    "北京长亭之旅/image/99273a23bb7a7e3f31a4df34eea6e4fe.jpg",
+    "北京长亭之旅/image/24b8071cb32e42f905426ffe4dd928f3.jpg",
+    "北京长亭之旅/image/3f15f1b16c574ce9f2e463da1f35fa8e.jpg",
+    "北京长亭之旅/image/6607f51a6080d58533c37cb21381e33c.jpg",
+    "北京长亭之旅/image/Pasted image 20260731113807.png",
+    "北京长亭之旅/image/Pasted image 20260731113805.png",
+    "K8s基础/image/Pasted image 20260731112310.png",
+    "K8s基础/image",
+    "基于Jabref的PR的一些猜测/index.md",
+    "K8s基础",
+    "D-3CTF2025/index.md",
+    "ctfshow入门CMS/index.md",
+    "2025HNCTF/index.md",
+    "image/Pasted.md",
+    "image",
+    "Java反序列化之高版本触发toString的几种方法/index.md",
+    "Java反序列化之Hessian反序列化/index.md",
+    "Java内存马之Spring-Controller内存马/index.md",
+    "Java反序列化之Fastjson1-2-6x绕过/index.md",
+    "域渗透之Kerberos协议/index.md",
     "Java反序列化CB链/index.md",
-    "Java题目之AliCTF2025-Jtools/image",
-    "Java题目之AliCTF2025-Jtools",
-    "Java题目之AliCTF2026 Fileury/index.md",
-    "Java题目之AliCTF2026 Fileury",
-    "未命名.base",
-    "CVE-2025-55182漏洞复现/index.md",
-    "0xgame2025Week3题解/index.md"
+    "ctfshow入门框架复现/index.md",
+    "ctfshow入门代码审计/index.md",
+    "PHP反序列化-TP5框架/index.md",
+    "ctfshow入门CMS/image",
+    "ctfshow入门CMS",
+    "ctfshow入门框架复现/image",
+    "ctfshow入门框架复现",
+    "测试文章",
+    "测试文章.zip",
+    "Docker逃逸学习/image"
   ]
 }

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "如何使用Agent以及一些好用的MCP&SKILL"
 date: 2026-04-01T10:45:56+08:00
 summary: "没AI是真不行啊"
@@ -191,7 +191,7 @@ claude mcp add js-reverse npx js-reverse-mcp
 
 #  一些好用的SKILL
 
-SKILL相比于MCP，更像是一种“菜谱”，它会规定像“这道菜需要翻炒5分钟后加入xxx调料”这样的行为规范
+SKILL相比于MCP，更像是一种特定的“菜谱”，它会规定像“这道菜需要翻炒5分钟后加入xxx调料”这样的行为规范
 
 在 [openai官方](https://help.openai.com/en/articles/20001066-skills-in-chatgpt) 介绍中是这样的：
 
@@ -222,3 +222,113 @@ SKILL相比于MCP，更像是一种“菜谱”，它会规定像“这道菜需
 项目地址：https://github.com/tanweai/pua/blob/main/README.zh-CN.md
 
 这个SKILL在很多时候能帮你解决AI效率不高和工作质量低下的问题，比如有时候ai会将一个任务反复做两三遍，无论你如何想让他完成任务，他总是会给不到你想要的效果，这时候用pua会有出其不意的效果。
+
+## opencli
+
+项目地址：https://github.com/jackwener/opencli
+
+这个skill是我在组内AI分享会上学到的，简单来说就是把浏览器网站变成cli命令行去进行访问和操控
+
+### opencli安装方法
+
+OpenCLI 需要 **Node.js >= 20**
+
+```bash
+node --version
+npm install -g @jackwener/opencli
+```
+
+然后在浏览器中添加拓展，从 [Chrome 网上应用店](https://chromewebstore.google.com/detail/opencli/ildkmabpimmkaediidaifkhjpohdnifk)安装 OpenCLI
+
+下载好后就可以通过cli快速访问很多网站
+
+验证安装
+
+```bash
+C:\Users\23232>opencli doctor
+⏳ Starting daemon...
+opencli v1.8.0 doctor (node v22.13.0)
+
+[OK] Daemon: running on port 19825 (v1.8.0)
+[OK] Extension: connected (v1.0.15)
+
+Profiles:
+  • 4szgk2m2: connected v1.0.15
+[OK] Connectivity: connected in 6.2s
+
+Everything looks good!
+```
+
+这样就是安装成功了
+
+### opencli使用方法
+
+```bash
+opencli list   #先list列出可以通过命令访问的网站有哪些
+```
+
+![](image/Pasted%20image%2020260522230424.png)
+
+可以看到比如小红书等知名网站都是可以用的
+
+那我们尝试获取小红书首页推荐
+
+```bash
+opencli xiaohongshu feed
+```
+
+以上就是正常的使用方法
+
+那如何在agent中使用呢？
+
+### agent代理skill
+
+```bash
+npx skills add jackwener/opencli
+```
+
+或者直接让ai参考文档给你安装就行了
+
+里面包括了四种skill
+
+| 技能                     | 何时使用                               | 向您的 AI 代理发出的示例提示                            |
+| ---------------------- | ---------------------------------- | ------------------------------------------- |
+| opencli-adapter-author | 为新站点编写可重用的适配器，或向现有站点添加命令。          | “编写抖音热搜适配器” / “编写一个命令，抓取此页面的热门帖子”           |
+| opencli-autofix        | 内置命令失败时修复损坏的适配器                    | “ `opencli zhihu hot` 返回空值——请修复”            |
+| opencli-browser        | 临时搭建一个真实的 Chrome 页面——浏览、填写表单、点击、提取 | “帮我查看我的小红书通知” / “帮我填写这份表格” / “使用浏览器命令抓取此页面” |
+| opencli-usage          | OpenCLI 命令和站点快速参考                  | OpenCLI 有哪些用于 Twitter 的命令？                  |
+
+测试一下
+
+```bash
+[$opencli-browser](C:\\Users\\23232\\.codex\\skills\\opencli-browser\\SKILL.md)  帮我读取https://wanth3f1ag.top/这个网站的友链并返回给我
+```
+
+![](image/Pasted%20image%2020260522231349.png)
+
+当然你也可以调用**opencli-adapter-author**这个skill给新站点写一个适配器
+
+## CLI-Anything+cli-hub-meta-skill
+
+既然有能将网站变成cli的skill，那当然也有能将软件变成cli的skill了
+
+项目地址：https://github.com/HKUDS/CLI-Anything#-codex-experimental-community
+
+这两个分别是什么？为什么这里是两个呢？
+
+CLI-Anything是一个笼统的概念，从项目仓库中不难看出有很多`CLI-Anything.*`的harness，这些harness代表着我们可以通过cli去调用对应的软件或者GUI 软件，但同时CLI-Anything又是一个SKILL，他可以根据你的需求为你的软件创建一个CLI，具体流程是这样的
+
+![](image/Pasted%20image%2020260522232339.png)
+
+cli-hub-meta-skill也是一个skill，但他主要起的是一个搜索查找`CLI-Anything.*`的作用，能帮你搜索并安装你想要的软件cli，但是这个skill的使用本质上是在调用到一个python的库：https://clianything.cc/
+
+![](image/Pasted%20image%2020260522232631.png)
+
+安装方法：
+
+```bash
+pip install cli-anything-hub
+```
+
+所以本质上一个是创建新cli一个是查找现有cli
+

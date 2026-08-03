@@ -1,4 +1,4 @@
-﻿---
+---
 title: "玄机第二章日志分析(二刷)"
 date: 2025-04-21T17:10:25+08:00
 summary: "玄机第二章日志分析"
@@ -36,7 +36,6 @@ Apache日志分析是专门针对Apache HTTP服务器生成的日志文件进行
 
 - 成功日志（access log）：
 
-
 记录了所有对Web服务器的请求，包括客户端IP地址、请求时间、请求方式、请求资源、响应状态码、数据传输量等。
 
 - 错误日志（error log）：
@@ -49,15 +48,6 @@ Apache日志分析是专门针对Apache HTTP服务器生成的日志文件进行
 
 访问日志：默认位置通常是/var/log/apache2/access.log.1（Debian/Ubuntu）或/var/log/httpd/access_log.1（CentOS/RHEL）。
 错误日志：默认位置通常是/var/log/apache2/error.log.1（Debian/Ubuntu）或/var/log/httpd/error_log.1（CentOS/RHEL）。
-
-- SSH日志
-
-
-身份验证日志：通常位于/var/log/auth.log（Debian/Ubuntu）或/var/log/secure（CentOS/RHEL）。
-
-- 系统日志
-
-系统日志：通常位于/var/log/syslog（Debian/Ubuntu）或/var/log/messages（CentOS/RHEL）。
 
 ### 问题1:提交当天访问次数最多的IP，即黑客IP
 
@@ -99,7 +89,7 @@ cut -d- -f 1 access.log.1|uniq -c | sort -rn | head -20
 
 命令解释:
 
-- `ut`：这是一个命令行工具，用于从每一行中提取特定的部分。
+- `cut`：这是一个命令行工具，用于从每一行中提取特定的部分。
 - `-d-`：指定字段的分隔符是`-`（一个连字符）。
 - `-f 1`：指定要提取第一个字段（即连字符前的部分）。
 - `access.log.1`：输入文件，假设这是Apache访问日志的文件名。

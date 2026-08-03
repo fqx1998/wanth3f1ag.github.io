@@ -1,4 +1,4 @@
-﻿---
+---
 title: "基础知识"
 date: 2024-12-13T15:16:45+08:00
 summary: "放点基础知识"
@@ -318,28 +318,28 @@ URL 编码使用 `%` 后跟两个十六进制数字表示字符的 ASCII 码。�
 - 中文字符 `中` 的 UTF-8 编码为 `E4 B8 AD`，因此 URL 编码为 `%E4%B8%AD`。
 
 | **字符** | **描述** | **URL 编码** |
-| -------- | -------- | ------------ |
-| 空格     | 空格符   | `%20`        |
-| !        | 感叹号   | `%21`        |
-| "        | 双引号   | `%22`        |
-| #        | 井号     | `%23`        |
-| $        | 美元符号 | `%24`        |
-| %        | 百分号   | `%25`        |
-| &        | 与号     | `%26`        |
-| '        | 单引号   | `%27`        |
-| (        | 左括号   | `%28`        |
-| )        | 右括号   | `%29`        |
-| *        | 星号     | `%2A`        |
-| +        | 加号     | `%2B`        |
-| ,        | 逗号     | `%2C`        |
-| /        | 斜杠     | `%2F`        |
-| :        | 冒号     | `%3A`        |
-| ;        | 分号     | `%3B`        |
-| =        | 等号     | `%3D`        |
-| ?        | 问号     | `%3F`        |
-| @        | At 符号  | `%40`        |
-| [        | 左方括号 | `%5B`        |
-| ]        | 右方括号 | `%5D`        |
+| ------ | ------ | ---------- |
+| 空格     | 空格符    | `%20`      |
+| !      | 感叹号    | `%21`      |
+| "      | 双引号    | `%22`      |
+| #      | 井号     | `%23`      |
+| $      | 美元符号   | `%24`      |
+| %      | 百分号    | `%25`      |
+| &      | 与号     | `%26`      |
+| '      | 单引号    | `%27`      |
+| (      | 左括号    | `%28`      |
+| )      | 右括号    | `%29`      |
+| *      | 星号     | `%2A`      |
+| +      | 加号     | `%2B`      |
+| ,      | 逗号     | `%2C`      |
+| /      | 斜杠     | `%2F`      |
+| :      | 冒号     | `%3A`      |
+| ;      | 分号     | `%3B`      |
+| =      | 等号     | `%3D`      |
+| ?      | 问号     | `%3F`      |
+| @      | At 符号  | `%40`      |
+| [      | 左方括号   | `%5B`      |
+| ]      | 右方括号   | `%5D`      |
 
 ### 请求头介绍
 
@@ -355,42 +355,42 @@ URL 编码使用 `%` 后跟两个十六进制数字表示字符的 ASCII 码。�
 
 ### **HTTP 请求头大全**
 
-| **分类**         | **请求头**                  | **说明**                                                     | **示例**                                                     |
-| :--------------- | :-------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| **通用请求头**   | `Host`                      | 指定服务器的域名和端口号。                                   | `Host: example.com`                                          |
-|                  | `User-Agent`                | 标识客户端（如浏览器、爬虫）的类型和版本。                   | `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)`      |
-|                  | `Accept`                    | 指定客户端希望接收的内容类型（MIME 类型）。                  | `Accept: text/html,application/xhtml+xml`                    |
-|                  | `Accept-Language`           | 指定客户端希望接收的语言。                                   | `Accept-Language: en-US,en;q=0.9`                            |
-|                  | `Accept-Encoding`           | 指定客户端希望接收的内容编码（如压缩格式）。                 | `Accept-Encoding: gzip, deflate, br`                         |
-|                  | `Connection`                | 控制连接的行为，如是否保持连接。                             | `Connection: keep-alive`                                     |
-|                  | `Cache-Control`             | 指定缓存策略。                                               | `Cache-Control: no-cache`                                    |
-|                  | `Pragma`                    | 用于向后兼容 HTTP/1.0 的缓存控制。                           | `Pragma: no-cache`                                           |
-|                  | `Upgrade-Insecure-Requests` | 指示客户端希望将不安全的 HTTP 请求升级为 HTTPS。             | `Upgrade-Insecure-Requests: 1`                               |
-|                  | **`Via`**                   | **用于记录请求或响应经过的代理服务器（正向代理/反向代理、网关、缓存等）路径信息**。 | `Via: ymzx.qq.com`                                           |
-| **请求内容相关** | `Content-Type`              | 指定请求体的内容类型（MIME 类型）。                          | `Content-Type: application/json`                             |
-|                  | `Content-Length`            | 指定请求体的长度（字节数）。                                 | `Content-Length: 348`                                        |
-|                  | `Content-Encoding`          | 指定请求体的编码方式（如压缩格式）。                         | `Content-Encoding: gzip`                                     |
-|                  | `Content-Language`          | 指定请求体的语言。                                           | `Content-Language: en-US`                                    |
-|                  | `Content-Location`          | 指定请求体的位置。                                           | `Content-Location: /path/to/resource`                        |
-|                  | `Content-Range`             | 指定请求体的范围（用于分块传输）。                           | `Content-Range: bytes 0-499/1234`                            |
-| **身份验证相关** | `Authorization`             | 传递身份验证信息（如 Bearer Token、Basic Auth）。            | `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
-|                  | `Cookie`                    | 传递客户端的 Cookie 信息。                                   | `Cookie: sessionId=abc123; username=john`                    |
-|                  | `Proxy-Authorization`       | 用于代理服务器的身份验证。                                   | `Proxy-Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l`        |
-| **条件请求相关** | `If-Modified-Since`         | 指定资源的最后修改时间，用于条件请求。                       | `If-Modified-Since: Mon, 10 Oct 2022 12:00:00 GMT`           |
-|                  | `If-None-Match`             | 指定资源的 ETag，用于条件请求。                              | `If-None-Match: "abc123"`                                    |
-|                  | `If-Unmodified-Since`       | 指定资源的最后修改时间，用于条件请求。                       | `If-Unmodified-Since: Mon, 10 Oct 2022 12:00:00 GMT`         |
-|                  | `If-Match`                  | 指定资源的 ETag，用于条件请求。                              | `If-Match: "abc123"`                                         |
-|                  | `If-Range`                  | 指定资源的 ETag 或最后修改时间，用于范围请求。               | `If-Range: "abc123"`                                         |
-| **其他请求头**   | `Referer`                   | 指定请求的来源页面。                                         | `Referer: https://example.com/page`                          |
-|                  | `Origin`                    | 指定请求的来源（用于跨域请求）。                             | `Origin: https://example.com`                                |
-|                  | `X-Requested-With`          | 标识请求是通过 AJAX 发送的。                                 | `X-Requested-With: XMLHttpRequest`                           |
-|                  | `DNT` (Do Not Track)        | 指示客户端是否启用“不跟踪”功能。                             | `DNT: 1`                                                     |
-|                  | `TE` (Transfer-Encoding)    | 指定客户端希望接收的传输编码。                               | `TE: trailers, deflate`                                      |
-| **自定义请求头** | `X-Forwarded-For`           | 标识客户端的原始 IP 地址（用于代理服务器）。                 | `X-Forwarded-For: 192.168.1.1`                               |
-|                  | `X-Forwarded-Proto`         | 标识客户端的原始协议（如 HTTP 或 HTTPS）。                   | `X-Forwarded-Proto: https`                                   |
-|                  | `X-Real-IP`                 | 标识客户端的真实 IP 地址。                                   | `X-Real-IP: 192.168.1.1`                                     |
-|                  | `X-Custom-Header`           | 自定义请求头，用于传递额外的信息。                           | `X-Custom-Header: value`                                     |
-|                  | **`Client-IP`**             | 直接标明代理提取的真实客户端 IP                              | `Client-IP: 1.2.3.4`                                         |
+| **分类**     | **请求头**                     | **说明**                                       | **示例**                                                          |
+| :--------- | :-------------------------- | :------------------------------------------- | :-------------------------------------------------------------- |
+| **通用请求头**  | `Host`                      | 指定服务器的域名和端口号。                                | `Host: example.com`                                             |
+|            | `User-Agent`                | 标识客户端（如浏览器、爬虫）的类型和版本。                        | `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)`         |
+|            | `Accept`                    | 指定客户端希望接收的内容类型（MIME 类型）。                     | `Accept: text/html,application/xhtml+xml`                       |
+|            | `Accept-Language`           | 指定客户端希望接收的语言。                                | `Accept-Language: en-US,en;q=0.9`                               |
+|            | `Accept-Encoding`           | 指定客户端希望接收的内容编码（如压缩格式）。                       | `Accept-Encoding: gzip, deflate, br`                            |
+|            | `Connection`                | 控制连接的行为，如是否保持连接。                             | `Connection: keep-alive`                                        |
+|            | `Cache-Control`             | 指定缓存策略。                                      | `Cache-Control: no-cache`                                       |
+|            | `Pragma`                    | 用于向后兼容 HTTP/1.0 的缓存控制。                       | `Pragma: no-cache`                                              |
+|            | `Upgrade-Insecure-Requests` | 指示客户端希望将不安全的 HTTP 请求升级为 HTTPS。               | `Upgrade-Insecure-Requests: 1`                                  |
+|            | **`Via`**                   | **用于记录请求或响应经过的代理服务器（正向代理/反向代理、网关、缓存等）路径信息**。 | `Via: ymzx.qq.com`                                              |
+| **请求内容相关** | `Content-Type`              | 指定请求体的内容类型（MIME 类型）。                         | `Content-Type: application/json`                                |
+|            | `Content-Length`            | 指定请求体的长度（字节数）。                               | `Content-Length: 348`                                           |
+|            | `Content-Encoding`          | 指定请求体的编码方式（如压缩格式）。                           | `Content-Encoding: gzip`                                        |
+|            | `Content-Language`          | 指定请求体的语言。                                    | `Content-Language: en-US`                                       |
+|            | `Content-Location`          | 指定请求体的位置。                                    | `Content-Location: /path/to/resource`                           |
+|            | `Content-Range`             | 指定请求体的范围（用于分块传输）。                            | `Content-Range: bytes 0-499/1234`                               |
+| **身份验证相关** | `Authorization`             | 传递身份验证信息（如 Bearer Token、Basic Auth）。         | `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
+|            | `Cookie`                    | 传递客户端的 Cookie 信息。                            | `Cookie: sessionId=abc123; username=john`                       |
+|            | `Proxy-Authorization`       | 用于代理服务器的身份验证。                                | `Proxy-Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l`           |
+| **条件请求相关** | `If-Modified-Since`         | 指定资源的最后修改时间，用于条件请求。                          | `If-Modified-Since: Mon, 10 Oct 2022 12:00:00 GMT`              |
+|            | `If-None-Match`             | 指定资源的 ETag，用于条件请求。                           | `If-None-Match: "abc123"`                                       |
+|            | `If-Unmodified-Since`       | 指定资源的最后修改时间，用于条件请求。                          | `If-Unmodified-Since: Mon, 10 Oct 2022 12:00:00 GMT`            |
+|            | `If-Match`                  | 指定资源的 ETag，用于条件请求。                           | `If-Match: "abc123"`                                            |
+|            | `If-Range`                  | 指定资源的 ETag 或最后修改时间，用于范围请求。                   | `If-Range: "abc123"`                                            |
+| **其他请求头**  | `Referer`                   | 指定请求的来源页面。                                   | `Referer: https://example.com/page`                             |
+|            | `Origin`                    | 指定请求的来源（用于跨域请求）。                             | `Origin: https://example.com`                                   |
+|            | `X-Requested-With`          | 标识请求是通过 AJAX 发送的。                            | `X-Requested-With: XMLHttpRequest`                              |
+|            | `DNT` (Do Not Track)        | 指示客户端是否启用“不跟踪”功能。                            | `DNT: 1`                                                        |
+|            | `TE` (Transfer-Encoding)    | 指定客户端希望接收的传输编码。                              | `TE: trailers, deflate`                                         |
+| **自定义请求头** | `X-Forwarded-For`           | 标识客户端的原始 IP 地址（用于代理服务器）。                     | `X-Forwarded-For: 192.168.1.1`                                  |
+|            | `X-Forwarded-Proto`         | 标识客户端的原始协议（如 HTTP 或 HTTPS）。                  | `X-Forwarded-Proto: https`                                      |
+|            | `X-Real-IP`                 | 标识客户端的真实 IP 地址。                              | `X-Real-IP: 192.168.1.1`                                        |
+|            | `X-Custom-Header`           | 自定义请求头，用于传递额外的信息。                            | `X-Custom-Header: value`                                        |
+|            | **`Client-IP`**             | 直接标明代理提取的真实客户端 IP                            | `Client-IP: 1.2.3.4`                                            |
 
 ### HTTP响应码大全
 
@@ -398,70 +398,70 @@ HTTP 响应码（HTTP Status Codes）是服务器对客户端请求的响应状�
 
 ### **HTTP 响应码大全**
 
-| **分类**            | **响应码** | **名称**                                          | **说明**                                               |
-| :------------------ | :--------- | :------------------------------------------------ | :----------------------------------------------------- |
-| **1xx: 信息响应**   | 100        | Continue（继续）                                  | 客户端应继续发送请求的剩余部分。                       |
-|                     | 101        | Switching Protocols（切换协议）                   | 服务器已理解客户端的请求，并将切换到指定的协议。       |
-|                     | 102        | Processing（处理中）                              | 服务器已收到请求，但尚未完成处理。                     |
-|                     | 103        | Early Hints（早期提示）                           | 服务器返回部分响应头，提示客户端提前加载资源。         |
-| **2xx: 成功响应**   | 200        | OK（成功）                                        | 请求已成功处理。                                       |
-|                     | 201        | Created（已创建）                                 | 请求已成功处理，并创建了新资源。                       |
-|                     | 202        | Accepted（已接受）                                | 请求已接受，但尚未处理完成。                           |
-|                     | 203        | Non-Authoritative Information（非权威信息）       | 请求成功，但返回的元信息来自缓存或第三方。             |
-|                     | 204        | No Content（无内容）                              | 请求成功，但响应中没有内容。                           |
-|                     | 205        | Reset Content（重置内容）                         | 请求成功，客户端应重置文档视图。                       |
-|                     | 206        | Partial Content（部分内容）                       | 服务器成功处理了部分 GET 请求。                        |
-|                     | 207        | Multi-Status（多状态）                            | 返回多个状态码，通常用于 WebDAV。                      |
-|                     | 208        | Already Reported（已报告）                        | 资源的状态已在前面的响应中报告。                       |
-|                     | 226        | IM Used（IM 已使用）                              | 服务器已完成对资源的操作，并返回结果。                 |
-| **3xx: 重定向响应** | 300        | Multiple Choices（多种选择）                      | 请求的资源有多个选择，客户端应选择其中一个。           |
-|                     | 301        | Moved Permanently（永久重定向）                   | 请求的资源已永久移动到新位置。                         |
-|                     | 302        | Found（临时重定向）                               | 请求的资源临时移动到新位置。                           |
-|                     | 303        | See Other（查看其他位置）                         | 客户端应使用 GET 方法访问新位置。                      |
-|                     | 304        | Not Modified（未修改）                            | 资源未修改，客户端可使用缓存版本。                     |
-|                     | 305        | Use Proxy（使用代理）                             | 请求的资源必须通过代理访问。                           |
-|                     | 307        | Temporary Redirect（临时重定向）                  | 请求的资源临时移动到新位置，客户端应保持原请求方法。   |
-|                     | 308        | Permanent Redirect（永久重定向）                  | 请求的资源已永久移动到新位置，客户端应保持原请求方法。 |
-| **4xx: 客户端错误** | 400        | Bad Request（错误请求）                           | 请求无效，服务器无法理解。                             |
-|                     | 401        | Unauthorized（未授权）                            | 请求需要身份验证。                                     |
-|                     | 402        | Payment Required（需要付款）                      | 保留状态码，通常用于支付系统。                         |
-|                     | 403        | Forbidden（禁止访问）                             | 服务器拒绝请求。                                       |
-|                     | 404        | Not Found（未找到）                               | 请求的资源不存在。                                     |
-|                     | 405        | Method Not Allowed（方法不允许）                  | 请求的方法不被允许。                                   |
-|                     | 406        | Not Acceptable（不可接受）                        | 服务器无法生成客户端可接受的响应。                     |
-|                     | 407        | Proxy Authentication Required（需要代理认证）     | 客户端需要通过代理进行身份验证。                       |
-|                     | 408        | Request Timeout（请求超时）                       | 请求超时，服务器未收到完整请求。                       |
-|                     | 409        | Conflict（冲突）                                  | 请求与服务器的当前状态冲突。                           |
-|                     | 410        | Gone（已删除）                                    | 请求的资源已永久删除。                                 |
-|                     | 411        | Length Required（需要长度）                       | 请求需要指定 `Content-Length` 头。                     |
-|                     | 412        | Precondition Failed（前提条件失败）               | 请求的前提条件不满足。                                 |
-|                     | 413        | Payload Too Large（负载过大）                     | 请求的负载超过服务器限制。                             |
-|                     | 414        | URI Too Long（URI 过长）                          | 请求的 URI 过长，服务器无法处理。                      |
-|                     | 415        | Unsupported Media Type（不支持的媒体类型）        | 请求的媒体类型不被支持。                               |
-|                     | 416        | Range Not Satisfiable（范围无效）                 | 请求的范围无效。                                       |
-|                     | 417        | Expectation Failed（期望失败）                    | 请求的 `Expect` 头无法满足。                           |
-|                     | 418        | I'm a teapot（我是茶壶）                          | 幽默响应码，表示服务器是茶壶。                         |
-|                     | 421        | Misdirected Request（错误定向请求）               | 请求被错误定向到无法处理它的服务器。                   |
-|                     | 422        | Unprocessable Entity（无法处理的实体）            | 请求格式正确，但语义错误。                             |
-|                     | 423        | Locked（已锁定）                                  | 请求的资源被锁定。                                     |
-|                     | 424        | Failed Dependency（依赖失败）                     | 请求依赖于另一个请求，但该请求失败。                   |
-|                     | 425        | Too Early（过早）                                 | 服务器拒绝处理可能被重放的请求。                       |
-|                     | 426        | Upgrade Required（需要升级）                      | 客户端需要升级协议。                                   |
-|                     | 428        | Precondition Required（需要前提条件）             | 请求需要包含前提条件。                                 |
-|                     | 429        | Too Many Requests（请求过多）                     | 客户端发送了过多请求。                                 |
-|                     | 431        | Request Header Fields Too Large（请求头字段过大） | 请求头字段过大，服务器无法处理。                       |
-|                     | 451        | Unavailable For Legal Reasons（因法律原因不可用） | 请求的资源因法律原因不可用。                           |
-| **5xx: 服务器错误** | 500        | Internal Server Error（服务器内部错误）           | 服务器遇到意外错误，无法完成请求。                     |
-|                     | 501        | Not Implemented（未实现）                         | 服务器不支持请求的功能。                               |
-|                     | 502        | Bad Gateway（错误网关）                           | 服务器作为网关或代理时，从上游服务器收到无效响应。     |
-|                     | 503        | Service Unavailable（服务不可用）                 | 服务器暂时无法处理请求（通常由于过载或维护）。         |
-|                     | 504        | Gateway Timeout（网关超时）                       | 服务器作为网关或代理时，未及时从上游服务器收到响应。   |
-|                     | 505        | HTTP Version Not Supported（HTTP 版本不支持）     | 服务器不支持请求的 HTTP 版本。                         |
-|                     | 506        | Variant Also Negotiates（变体协商）               | 服务器内部配置错误。                                   |
-|                     | 507        | Insufficient Storage（存储不足）                  | 服务器无法存储完成请求所需的内容。                     |
-|                     | 508        | Loop Detected（检测到循环）                       | 服务器检测到无限循环。                                 |
-|                     | 510        | Not Extended（未扩展）                            | 请求需要进一步扩展。                                   |
-|                     | 511        | Network Authentication Required（需要网络认证）   | 客户端需要通过网络进行身份验证。                       |
+| **分类**         | **响应码** | **名称**                                   | **说明**                      |
+| :------------- | :------ | :--------------------------------------- | :-------------------------- |
+| **1xx: 信息响应**  | 100     | Continue（继续）                             | 客户端应继续发送请求的剩余部分。            |
+|                | 101     | Switching Protocols（切换协议）                | 服务器已理解客户端的请求，并将切换到指定的协议。    |
+|                | 102     | Processing（处理中）                          | 服务器已收到请求，但尚未完成处理。           |
+|                | 103     | Early Hints（早期提示）                        | 服务器返回部分响应头，提示客户端提前加载资源。     |
+| **2xx: 成功响应**  | 200     | OK（成功）                                   | 请求已成功处理。                    |
+|                | 201     | Created（已创建）                             | 请求已成功处理，并创建了新资源。            |
+|                | 202     | Accepted（已接受）                            | 请求已接受，但尚未处理完成。              |
+|                | 203     | Non-Authoritative Information（非权威信息）     | 请求成功，但返回的元信息来自缓存或第三方。       |
+|                | 204     | No Content（无内容）                          | 请求成功，但响应中没有内容。              |
+|                | 205     | Reset Content（重置内容）                      | 请求成功，客户端应重置文档视图。            |
+|                | 206     | Partial Content（部分内容）                    | 服务器成功处理了部分 GET 请求。          |
+|                | 207     | Multi-Status（多状态）                        | 返回多个状态码，通常用于 WebDAV。        |
+|                | 208     | Already Reported（已报告）                    | 资源的状态已在前面的响应中报告。            |
+|                | 226     | IM Used（IM 已使用）                          | 服务器已完成对资源的操作，并返回结果。         |
+| **3xx: 重定向响应** | 300     | Multiple Choices（多种选择）                   | 请求的资源有多个选择，客户端应选择其中一个。      |
+|                | 301     | Moved Permanently（永久重定向）                 | 请求的资源已永久移动到新位置。             |
+|                | 302     | Found（临时重定向）                             | 请求的资源临时移动到新位置。              |
+|                | 303     | See Other（查看其他位置）                        | 客户端应使用 GET 方法访问新位置。         |
+|                | 304     | Not Modified（未修改）                        | 资源未修改，客户端可使用缓存版本。           |
+|                | 305     | Use Proxy（使用代理）                          | 请求的资源必须通过代理访问。              |
+|                | 307     | Temporary Redirect（临时重定向）                | 请求的资源临时移动到新位置，客户端应保持原请求方法。  |
+|                | 308     | Permanent Redirect（永久重定向）                | 请求的资源已永久移动到新位置，客户端应保持原请求方法。 |
+| **4xx: 客户端错误** | 400     | Bad Request（错误请求）                        | 请求无效，服务器无法理解。               |
+|                | 401     | Unauthorized（未授权）                        | 请求需要身份验证。                   |
+|                | 402     | Payment Required（需要付款）                   | 保留状态码，通常用于支付系统。             |
+|                | 403     | Forbidden（禁止访问）                          | 服务器拒绝请求。                    |
+|                | 404     | Not Found（未找到）                           | 请求的资源不存在。                   |
+|                | 405     | Method Not Allowed（方法不允许）                | 请求的方法不被允许。                  |
+|                | 406     | Not Acceptable（不可接受）                     | 服务器无法生成客户端可接受的响应。           |
+|                | 407     | Proxy Authentication Required（需要代理认证）    | 客户端需要通过代理进行身份验证。            |
+|                | 408     | Request Timeout（请求超时）                    | 请求超时，服务器未收到完整请求。            |
+|                | 409     | Conflict（冲突）                             | 请求与服务器的当前状态冲突。              |
+|                | 410     | Gone（已删除）                                | 请求的资源已永久删除。                 |
+|                | 411     | Length Required（需要长度）                    | 请求需要指定 `Content-Length` 头。  |
+|                | 412     | Precondition Failed（前提条件失败）              | 请求的前提条件不满足。                 |
+|                | 413     | Payload Too Large（负载过大）                  | 请求的负载超过服务器限制。               |
+|                | 414     | URI Too Long（URI 过长）                     | 请求的 URI 过长，服务器无法处理。         |
+|                | 415     | Unsupported Media Type（不支持的媒体类型）         | 请求的媒体类型不被支持。                |
+|                | 416     | Range Not Satisfiable（范围无效）              | 请求的范围无效。                    |
+|                | 417     | Expectation Failed（期望失败）                 | 请求的 `Expect` 头无法满足。         |
+|                | 418     | I'm a teapot（我是茶壶）                       | 幽默响应码，表示服务器是茶壶。             |
+|                | 421     | Misdirected Request（错误定向请求）              | 请求被错误定向到无法处理它的服务器。          |
+|                | 422     | Unprocessable Entity（无法处理的实体）            | 请求格式正确，但语义错误。               |
+|                | 423     | Locked（已锁定）                              | 请求的资源被锁定。                   |
+|                | 424     | Failed Dependency（依赖失败）                  | 请求依赖于另一个请求，但该请求失败。          |
+|                | 425     | Too Early（过早）                            | 服务器拒绝处理可能被重放的请求。            |
+|                | 426     | Upgrade Required（需要升级）                   | 客户端需要升级协议。                  |
+|                | 428     | Precondition Required（需要前提条件）            | 请求需要包含前提条件。                 |
+|                | 429     | Too Many Requests（请求过多）                  | 客户端发送了过多请求。                 |
+|                | 431     | Request Header Fields Too Large（请求头字段过大） | 请求头字段过大，服务器无法处理。            |
+|                | 451     | Unavailable For Legal Reasons（因法律原因不可用）  | 请求的资源因法律原因不可用。              |
+| **5xx: 服务器错误** | 500     | Internal Server Error（服务器内部错误）           | 服务器遇到意外错误，无法完成请求。           |
+|                | 501     | Not Implemented（未实现）                     | 服务器不支持请求的功能。                |
+|                | 502     | Bad Gateway（错误网关）                        | 服务器作为网关或代理时，从上游服务器收到无效响应。   |
+|                | 503     | Service Unavailable（服务不可用）               | 服务器暂时无法处理请求（通常由于过载或维护）。     |
+|                | 504     | Gateway Timeout（网关超时）                    | 服务器作为网关或代理时，未及时从上游服务器收到响应。  |
+|                | 505     | HTTP Version Not Supported（HTTP 版本不支持）   | 服务器不支持请求的 HTTP 版本。          |
+|                | 506     | Variant Also Negotiates（变体协商）            | 服务器内部配置错误。                  |
+|                | 507     | Insufficient Storage（存储不足）               | 服务器无法存储完成请求所需的内容。           |
+|                | 508     | Loop Detected（检测到循环）                     | 服务器检测到无限循环。                 |
+|                | 510     | Not Extended（未扩展）                        | 请求需要进一步扩展。                  |
+|                | 511     | Network Authentication Required（需要网络认证）  | 客户端需要通过网络进行身份验证。            |
 
 ### Python发送http请求
 

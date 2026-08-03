@@ -1,4 +1,4 @@
-﻿---
+---
 title: "2025HNCTF"
 date: 2025-06-07T08:00:18+08:00
 summary: "2025HNCTF"
@@ -75,7 +75,7 @@ $b -> HongCaFei = "phpinfo";
 $a -> dengchao -> dao = array($b, "1");
 ```
 
-这里的话call_user_func_array会调用$d中的1函数，所以会触发`__call`，同时函数名就是传入`__call`的第一个参数$name，是可控的，那我们可以构造例如$name=ls的命令，然后让函数名也就是HongCaFei变量的值为system，这里还需要绕过GC回收机制，最终的poc
+这里的话call_user_func_array会调用\$d中的1函数，所以会触发`__call`，同时函数名就是传入`__call`的第一个参数$name，是可控的，那我们可以构造例如$name=ls的命令，然后让函数名也就是HongCaFei变量的值为system，这里还需要绕过GC回收机制，最终的poc
 
 ```php
 <?php

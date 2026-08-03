@@ -1,4 +1,4 @@
-﻿---
+---
 title: "PHP反序列化-Laravel框架"
 date: 2025-06-02T12:14:32+08:00
 summary: "PHP反序列化-Laravel框架"
@@ -309,7 +309,7 @@ $exitCode = $this->app[Kernel::class]->call($this->command, $this->parameters);
 
 ![image-20250602145533130](image/image-20250602145533130.png)
 
-可以看到这里判断`$this->bindings[$abstract])`是否存在，若存在则返回`$this->bindings[$abstract]['concrete']`。$bindings是Container类的一个属性，如果我们能控制该属性的值，要寻找一个继承自`Container`的类，而`Illuminate\Foundation\Application`恰好继承自`Container`类，所以我们选择该对象传入`$this->app`的，由于我们已知`$abstract`变量为`Illuminate\Contracts\Console\Kernel`，所以我们只需通过反序列化定义`Illuminate\Foundation\Application`的`$bindings`属性存在键名为`Illuminate\Contracts\Console\Kernel`的二维数组就能进入该分支语句，返回我们要实例化的类名。在这里返回的是`Illuminate\Foundation\Application`类，然后就可以执行call方法实现RCE
+可以看到这里判断`$this->bindings[$abstract])`是否存在，若存在则返回`$this->bindings[$abstract]['concrete']`。\$bindings是Container类的一个属性，如果我们能控制该属性的值，要寻找一个继承自`Container`的类，而`Illuminate\Foundation\Application`恰好继承自`Container`类，所以我们选择该对象传入`$this->app`的，由于我们已知`$abstract`变量为`Illuminate\Contracts\Console\Kernel`，所以我们只需通过反序列化定义`Illuminate\Foundation\Application`的`$bindings`属性存在键名为`Illuminate\Contracts\Console\Kernel`的二维数组就能进入该分支语句，返回我们要实例化的类名。在这里返回的是`Illuminate\Foundation\Application`类，然后就可以执行call方法实现RCE
 
 ## 0x05exp编写
 
