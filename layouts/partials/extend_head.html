@@ -1,0 +1,7 @@
+{{- $site_search := resources.Get "js/search-modal.js" | js.Build | resources.Minify -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $site_search = $site_search | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $site_search.RelPermalink }}" integrity="{{ $site_search.Data.Integrity }}"></script>
+{{- else -}}
+<script defer crossorigin="anonymous" src="{{ $site_search.RelPermalink }}"></script>
+{{- end -}}

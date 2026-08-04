@@ -1,0 +1,138 @@
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+{{- $pages = where $pages "Params.searchHidden" "!=" true -}}
+{{- $pages = where $pages "Layout" "!=" "archives" -}}
+{{- $pages = where $pages "Layout" "!=" "search" -}}
+{{- $recent := first 5 ($pages.ByLastmod.Reverse) -}}
+{{- $suggestions := slice -}}
+{{- range $pages -}}
+  {{- range .Params.tags -}}
+    {{- $value := strings.TrimSpace (string .) -}}
+    {{- if and $value (not (in $suggestions $value)) -}}
+      {{- $suggestions = $suggestions | append $value -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range .Params.categories -}}
+    {{- $value := strings.TrimSpace (string .) -}}
+    {{- if and $value (not (in $suggestions $value)) -}}
+      {{- $suggestions = $suggestions | append $value -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<div
+    id="site-search"
+    class="site-search"
+    data-search-root
+    data-index-url="{{ "index.json" | relURL }}"
+    hidden>
+    <button class="site-search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+
+    <div class="site-search-window" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+        <header class="site-search-header">
+            <div class="site-search-toolbar">
+                <div class="site-search-title-group">
+                    <span class="site-search-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </span>
+                    <div>
+                        <h2 id="site-search-title">站内搜索</h2>
+                        <p>搜索标题、正文、标签和关键词</p>
+                    </div>
+                </div>
+
+                <div class="site-search-toolbar-actions">
+                    <span class="site-search-shortcut">Ctrl K</span>
+                    <button class="site-search-icon-button" type="button" data-search-close aria-label="关闭搜索">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="site-search-input-shell">
+                <svg class="site-search-input-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                    id="site-search-input"
+                    class="site-search-input"
+                    type="search"
+                    autocomplete="off"
+                    spellcheck="false"
+                    maxlength="64"
+                    placeholder="搜索标题、正文、标签、关键词">
+                <button class="site-search-clear hidden" type="button" data-search-clear>清空</button>
+            </div>
+
+            <p class="site-search-hint" data-search-status>支持标题、正文、摘要、标签和自定义关键词匹配</p>
+        </header>
+
+        <div class="site-search-body">
+            <section class="site-search-state" data-search-empty>
+                <div class="site-search-state-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 8v4l2.5 2.5"></path>
+                    </svg>
+                </div>
+                <h3>开始搜索</h3>
+                <p>试试输入文章标题、正文片段、分类、标签或关键词。</p>
+
+                {{- if gt (len $suggestions) 0 }}
+                <div class="site-search-suggestions">
+                    {{- range first 6 $suggestions }}
+                    <button type="button" class="site-search-suggestion" data-search-suggestion="{{ . }}">{{ . }}</button>
+                    {{- end }}
+                </div>
+                {{- end }}
+
+                {{- if gt (len $recent) 0 }}
+                <div class="site-search-recent">
+                    <div class="site-search-section-title">
+                        <span>最近更新</span>
+                    </div>
+                    <div class="site-search-quick-list">
+                        {{- range $recent }}
+                        <a class="site-search-quick-link" href="{{ .RelPermalink }}">
+                            <strong>{{ .Title }}</strong>
+                            <span>{{ .Lastmod.Format "2006-01-02" }}</span>
+                        </a>
+                        {{- end }}
+                    </div>
+                </div>
+                {{- end }}
+            </section>
+
+            <section class="site-search-state hidden" data-search-loading>
+                <div class="site-search-loading-dot"></div>
+                <p>正在加载搜索索引...</p>
+            </section>
+
+            <section class="site-search-state hidden" data-search-error>
+                <h3>搜索暂时不可用</h3>
+                <p>索引文件加载失败，请刷新页面后重试。</p>
+            </section>
+
+            <section class="site-search-state hidden" data-search-no-results>
+                <h3>没有找到结果</h3>
+                <p>试试缩短关键词，或者换成标签和分类名称。</p>
+            </section>
+
+            <section class="site-search-results hidden" data-search-results-wrap>
+                <div class="site-search-results-head">
+                    <span data-search-count>0 条结果</span>
+                </div>
+                <div class="site-search-results-list" data-search-results></div>
+            </section>
+        </div>
+    </div>
+</div>

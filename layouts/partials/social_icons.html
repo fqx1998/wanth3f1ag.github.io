@@ -1,0 +1,19 @@
+<div class="social-icons" {{ with .align}}align="{{.}}" {{- end }}>
+    {{- range site.Params.socialIcons }}
+    {{- $iconName := (trim .name " " | lower) -}}
+    {{- $label := .title | default (.name | title) -}}
+    {{- if eq $iconName "qq" }}
+    <span class="social-icon-static social-icon-with-tooltip" role="img" aria-label="QQ {{ $label }}" tabindex="0">
+        <span class="social-icon-glyph">
+            {{ partial "svg.html" . }}
+        </span>
+        <span class="social-icon-tooltip" aria-hidden="true">{{ $label }}</span>
+    </span>
+    {{- else }}
+    <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+        title="{{ $label }}" aria-label="{{ $label }}">
+        {{ partial "svg.html" . }}
+    </a>
+    {{- end }}
+    {{- end }}
+</div>

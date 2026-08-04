@@ -1,0 +1,322 @@
+{
+  "main": {
+    "id": "c952482de246fb12",
+    "type": "split",
+    "children": [
+      {
+        "id": "7789ef0be10d708d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4cdb40dad123ba3b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "北京长亭之旅/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "1bb2473f8958f5f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "流量分析/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "59e35bd1e88b7016",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "深入浅出sql注入之mysql/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "422aa7255e5d1685",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Docker逃逸学习/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "9a0bfea327926d2a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "K8s基础/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "9a0ff528a208f33f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "应急响应（持续更新）/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a01b40c32330a46e",
+    "type": "split",
+    "children": [
+      {
+        "id": "44f55476414b4c2f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7f77ca1121260c9a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byModifiedTime",
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "be40578dc60f0a7b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "unsafe",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "803302ec756440e1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "286056ec39525c8b",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "pinned": true,
+              "icon": "clock",
+              "title": "Recent Files"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 298.5596160888672
+  },
+  "right": {
+    "id": "3c2493f62281522c",
+    "type": "split",
+    "children": [
+      {
+        "id": "c0c3aadcc641feb3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "52166ea3134f5a11",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "FBCTF2019wp/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "index 的反向链接列表"
+            }
+          },
+          {
+            "id": "bf8b10719cc40e9d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "FBCTF2019wp/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "index 的出链列表"
+            }
+          },
+          {
+            "id": "de2b1eef9afb079e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "5cdf16737b4b3174",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "9754cad470f75d98",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "北京长亭之旅/index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 280.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "4cdb40dad123ba3b",
+  "lastOpenFiles": [
+    "深入浅出sql注入之mysql/index.md",
+    "对于RCE和文件包含的一点总结/index.md",
+    "应急响应（持续更新）/index.md",
+    "K8s基础/index.md",
+    "Docker逃逸学习/index.md",
+    "流量分析/index.md",
+    "Java题目之巅峰极客2024-Ezjava/index.md",
+    "SUCTF2026/index.md",
+    "SSRF的一些学习/index.md",
+    "web入门反序列化篇-ctfshow/index.md",
+    "Java反序列化/index.md",
+    "北京长亭之旅/index.md",
+    "北京长亭之旅/image/ec3a5323ced3fc33c5063c4bc91612d2.jpg",
+    "北京长亭之旅/image/53e7d9912b4b371197be1c6414d4271b.jpg",
+    "北京长亭之旅/image/f3cb92470a956185d6481092034ffc13.jpg",
+    "北京长亭之旅/image/99273a23bb7a7e3f31a4df34eea6e4fe.jpg",
+    "北京长亭之旅/image/24b8071cb32e42f905426ffe4dd928f3.jpg",
+    "北京长亭之旅/image/3f15f1b16c574ce9f2e463da1f35fa8e.jpg",
+    "北京长亭之旅/image/6607f51a6080d58533c37cb21381e33c.jpg",
+    "北京长亭之旅/image/Pasted image 20260731113807.png",
+    "北京长亭之旅/image/Pasted image 20260731113805.png",
+    "K8s基础/image/Pasted image 20260731112310.png",
+    "K8s基础/image",
+    "基于Jabref的PR的一些猜测/index.md",
+    "K8s基础",
+    "D-3CTF2025/index.md",
+    "ctfshow入门CMS/index.md",
+    "2025HNCTF/index.md",
+    "image/Pasted.md",
+    "image",
+    "Java反序列化之高版本触发toString的几种方法/index.md",
+    "Java反序列化之Hessian反序列化/index.md",
+    "Java内存马之Spring-Controller内存马/index.md",
+    "Java反序列化之Fastjson1-2-6x绕过/index.md",
+    "域渗透之Kerberos协议/index.md",
+    "Java反序列化CB链/index.md",
+    "ctfshow入门框架复现/index.md",
+    "ctfshow入门代码审计/index.md",
+    "PHP反序列化-TP5框架/index.md",
+    "ctfshow入门CMS/image",
+    "ctfshow入门CMS",
+    "ctfshow入门框架复现/image",
+    "ctfshow入门框架复现",
+    "测试文章",
+    "测试文章.zip",
+    "Docker逃逸学习/image"
+  ]
+}

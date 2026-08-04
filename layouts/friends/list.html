@@ -1,0 +1,112 @@
+{{- define "main" -}}
+{{- $groups := hugo.Data.friends.groups | default (slice) -}}
+{{- $legacyItems := hugo.Data.friends.items | default (slice) -}}
+{{- if and (eq (len $groups) 0) (gt (len $legacyItems) 0) -}}
+  {{- $groups = slice (dict "title" "Friends" "items" $legacyItems) -}}
+{{- end -}}
+{{- $friendCount := 0 -}}
+
+{{- range $groups -}}
+  {{- $friendCount = add $friendCount (len (.items | default (slice))) -}}
+{{- end -}}
+
+<header class="page-header friends-hero">
+  {{- partial "breadcrumbs.html" . -}}
+  <div class="friends-hero-body">
+    <div class="friends-hero-copy">
+      <h1>{{ .Title }}</h1>
+      {{- if .Description }}
+      <p>{{ .Description }}</p>
+      {{- end }}
+    </div>
+    <div class="friends-hero-stats">
+      <div class="friends-stat-card">
+        <strong>{{ $friendCount }}</strong>
+        <span>友链</span>
+      </div>
+      <div class="friends-stat-card">
+        <strong>{{ len $groups }}</strong>
+        <span>分组</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+{{- if .Content }}
+<div class="md-content">
+  {{- if not (.Param "disableAnchoredHeadings") -}}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else -}}
+  {{- .Content -}}
+  {{- end -}}
+</div>
+{{- end }}
+
+{{- if gt $friendCount 0 }}
+<div class="friends-groups">
+  {{- range $groups }}
+  {{- $items := .items | default (slice) -}}
+  {{- if gt (len $items) 0 }}
+  <section class="friends-group" aria-label="{{ .title }}">
+    <div class="friends-group-head">
+      <h2>{{ .title }}</h2>
+      {{- with .description }}
+      <p>{{ . }}</p>
+      {{- end }}
+    </div>
+
+    <div class="friends-grid">
+      {{- range $items }}
+      {{- $name := .name | default "Unnamed" -}}
+      {{- $tags := .tags | default (slice) -}}
+      {{- $avatar := .avatar | default "" -}}
+      {{- $initial := substr (string $name) 0 1 -}}
+      <article class="friends-card">
+        <div class="friends-card-top">
+          {{- if $avatar }}
+          <img class="friends-card-avatar" src="{{ $avatar | safeURL }}" alt="{{ $name }}">
+          {{- else }}
+          <div class="friends-card-avatar friends-card-avatar-fallback" aria-hidden="true">{{ $initial }}</div>
+          {{- end }}
+          <div class="friends-card-copy">
+            <h2>{{ $name }}</h2>
+            {{- with .description }}
+            <p>{{ . }}</p>
+            {{- else }}
+            <p>暂无简介</p>
+            {{- end }}
+          </div>
+        </div>
+
+        {{- if gt (len $tags) 0 }}
+        <div class="friends-card-tags">
+          {{- range $tags }}
+          <span>{{ . }}</span>
+          {{- end }}
+        </div>
+        {{- end }}
+
+        <footer class="friends-card-footer">
+          <a href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer">
+            Visit
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </a>
+        </footer>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+  {{- end }}
+</div>
+{{- else }}
+<section class="friends-empty">
+  <strong>还没有友链</strong>
+  <p>先去编辑 <code>data/friends.yaml</code>，加完就会自动显示在这里。</p>
+</section>
+{{- end }}
+{{- end -}}

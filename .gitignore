@@ -1,0 +1,7 @@
+.hugo_build.lock
+.codex-hugo-verify/
+.codex-pages-check/
+output/
+public/
+resources/_gen/
+Thumbs.db

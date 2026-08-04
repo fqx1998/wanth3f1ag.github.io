@@ -1,0 +1,59 @@
+.social-icons .social-icon-static {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    cursor: help;
+}
+
+.social-icons .social-icon-static svg {
+    height: 26px;
+    width: 26px;
+}
+
+.social-icons .social-icon-with-tooltip {
+    outline: none;
+}
+
+.social-icons .social-icon-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icons .social-icon-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translate(-50%, 8px);
+    opacity: 0;
+    pointer-events: none;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    color: var(--primary);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+    font-size: 13px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 2;
+}
+
+.social-icons .social-icon-tooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--entry);
+}
+
+.social-icons .social-icon-with-tooltip:hover .social-icon-tooltip,
+.social-icons .social-icon-with-tooltip:focus-visible .social-icon-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}

@@ -1,0 +1,89 @@
+groups:
+  - title: "mylinks"
+    description: "一些好朋友"
+    items:
+      - name: "baozongwi"
+        url: "https://baozongwi.xyz/"
+        description: "老包"
+        avatar: "https://baozongwi.xyz/images/acvtar.jpg"
+        tags:
+         - CTF
+         - web
+      - name: "橘子师傅"
+        url: "https://squirrelblog.com/"
+        description: "师傅"
+        avatar: "http://squirrelblog.com/wp-content/uploads/2024/11/%E6%9D%BE%E9%BC%A0%E5%8D%9A%E5%AE%A2%E9%80%8F%E6%98%8E.png"
+      - name: "转风哥"
+        url: "http://index.ctfwiki.cn/"
+        description: "转风哥"
+        avatar: "/images/friends/zhuanfeng.jpg"
+      - name: "花师傅"
+        url: "https://nlrvana.github.io/"
+        description: "SU的师傅"
+        avatar: "https://nlrvana.github.io/avatar.png"
+        tags:
+         - Java大手子
+         - web
+      - name: "infernity师傅"
+        url: "https://infernity.top/"
+        description: "web大师傅"
+        avatar: "http://q1.qlogo.cn/g?b=qq&nk=1366400792&s=640"
+        tags:
+         - CTF&渗透大手子
+         - web
+      - name: "BR师傅"
+        url: "https://blog.yzbrh.top/"
+        description: "web大师傅"
+        avatar: "https://blog.yzbrh.top/img/avatar.jpg"
+        tags:
+         - CTF
+         - web
+      - name: "姜师傅"
+        url: "http://lycoreco.cn/"
+        description: "姜师傅"
+        avatar: "http://lycoreco.cn/wp-content/uploads/2025/07/63AF5AD5B3F4AD601FB3975EB381B681-300x300.jpg"
+        tags:
+         - CTF
+         - Pwn
+      - name: "蔡师傅"
+        url: "https://star492.github.io/"
+        description: "蔡师傅"
+        avatar: "/images/friends/Cai_avatar.jpg"
+        tags:
+         - CTF
+         - Pwn
+      - name: "Myst1ry"
+        url: "https://www.cnblogs.com/Myst1ry"
+        description: "Misc师傅"
+        avatar: "/images/friends/Myst1ry.jpg"
+        tags:
+         - CTF
+         - MISC
+
+  - title: "Gam4"
+    description: "常用 CTF 平台"
+    items:
+      - name: "ctfsh0w"
+        url: "https://ctf.show/"
+        description: "适合ctfer新手入门的最好的平台"
+        avatar: "/images/friends/ctfshow.jpg"
+      - name: "ctftim4"
+        url: "https://ctftime.org/"
+        description: "世界CTF战队排名以及许多赛事的通知"
+        avatar: "https://ctftime.org/static/images/ct/logo.svg"
+      - name: "BUUCTF"
+        url: "https://buuoj.cn/"
+        description: "一个很好的CTF平台"
+        avatar: "https://img.buuoj.cn/buugirl/img.php"
+      - name: "bu9ku"
+        url: "https://ctf.bugku.com/"
+        description: "一个很好的CTF平台"
+        avatar: "https://ctf.bugku.com/upload/20201117/bugku.svg"
+      - name: "nssctf"
+        url: "https://www.nssctf.cn/index"
+        description: "一个很好的CTF平台"
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABMlBMVEVHcEzHy86MwvZ0f4TNzM3Hy865vsK1u7+0ub17kqKhwdpQj8+yt7vJ1+ZdY2qssra+wsXA4P5fmNNjiYpgjKnL0NRwpdnM4fbF5v+doqZGTVeUqLzV2txtdH7X3eD/9vHO1NfZ297+8+/R1tnJ0NPx5eHQ3N5Oj7a7wsRgt7fd4uRXi449n//Cy8571eLF29+jw8bl3NpNsLDY0tBN2+88vMmIi5CRwcODv/9dYmxpb3pJzN1i1OSu0+RZyNhDe46OtNtvtP9UpfjE1djm6ev27uuVztWT2uVyeoLEw8SFztpAi9VrpeFKh5o5j+iby/9GTlmuzM81xdWorbGvtLhgr/94ubo/o6c7e61hbnj//PjU7e9q1eV/x9Js4vEz3fNMdXhdl6iMmqcaZIFDZ3gAVqyp5tzUAAAAHHRSTlMA4GBB/pyD/lYQIM+VNyB2wNT876/KoPO309CSMT7PNQAAAr1JREFUOI1Vk4d24jAQRQULGMImm7Z9sGXkbmM6offeOyS0lN3//4WVKQn7bJ/jo3c1M5JGCJ3pE8OCAB+yedB/+sICEO0MAOw+9z9bngCExiD0oW8F4IxwWT7BfAjvJ9NoEOIBPvLvYwu8oPIfQOUMYIWgBJrAPzxYANkDFfp/8r8KksRWKxVJVXirgMOnvgNOBx0ICIKEI6BVAwA8oQOaio+A2+mkWScM5gMRHjRFCrJBkLRqPcgefDeipeNWdMKPrBoZiQqzwWp9pFn+JUXo+h2cqOA9ECWEsDQFrVg7bZIASksUW2ClINGWwjAMocCcPwEsMLjGOAiOYAmLNcIDxsCH1BPgZAErT51plETaazO3kiRClwIP8eARsAmAw2LuL0Mi+XY7P87k25tGw8yMKwffY2MAi34uJzoi2fomE39bxDdmNpsZj44H4boGEvb7xbAYMTfZXSYej+cb61hmHDgEQC4XTcFRQlPX+exum12PM41YLK46Tr3ihgBPAU6pBc38Lrbd7kwzlo/PbUfAfQUKpoClSnsbi8XMdqMxV+dO9M1uNZ7nSlCI6D+qulqtRvVsrqeGLpFx67WQK9uUjXL+Wu2AcGHGzE0Waguh0szoeO0X6Pony4icn66V46g/qedwYjFnEJqVjYHR99p/u0BJ7L3hpBYN1SWeaS5CCkLlWXKQLA3K3vugkGCeOO4pmkgwIeCVaWrRTFyg78UuJcqlZKlTfG3qDvGOnmo0AFNfIqWnUr8Qst8Uu+WBMSgZnZ7cK+h6QQknYDp8TKUf083UvmFuckWaqdTtyf2l3HvWn1+bw7Qv7fP50sPDPl38KMrdpGHMirK8LLzoespyqYbNU9vrL7JcNEpdWU7KcqGgP++JlM/3frE8nnt5edvRu2VZ7vSXBf3xEOP89t7pvbc/feNF7hsGRQ7EP3ikkKTUEgM8AAAAAElFTkSuQmCC"
+      - name: "polarctf"
+        url: "https://polarctf.com/"
+        description: "一个很好的CTF平台"
+        avatar: "https://polarctf.com/themes/nctf/static/img/logo.e77eb7e1.png"
